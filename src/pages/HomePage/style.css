@@ -11,17 +11,6 @@
   margin: 0, auto;
 }
 
-.MapContainer {
-  display: flex;
-  border: 5px solid;
-  border-radius: 10px;
-  height: 40vw;
-  width: 60vw;
-  max-width: 800px;
-  max-height: 500px;
-  margin-top: 250px;
-}
-
 .CatContainer {
   width: 200px;
 }

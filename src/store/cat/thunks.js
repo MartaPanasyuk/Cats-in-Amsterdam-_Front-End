@@ -7,9 +7,32 @@ const API_URL = `http://localhost:4000`;
 export const fetchCat = () => async (dispatch, getState) => {
   try {
     const response = await axios.get(`${API_URL}/cats`);
-    console.log("response", response.data);
+    //console.log("response", response.data);
     const res = response.data;
     dispatch(catFetched(res));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+//Get Cat by Id includes Images and Comments
+export const fetchCatWithInfo = (catId) => async (dispatch, getState) => {
+  try {
+    const response = await axios.get(`${API_URL}/cats/${catId}`);
+    //console.log("response", response.data);
+    const res = response.data;
+    dispatch(catDetailsFatched(res));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+// PUT change the number of  seenigTimes
+export const updayteCatSeenTimes = (catId) => async (dispatch, getState) => {
+  try {
+    const response = await axios.put(`${API_URL}/cats/${catId}`);
+    //console.log("response", response.data);
+    dispatch(catDetailsFatched(response.data));
   } catch (e) {
     console.log(e.message);
   }

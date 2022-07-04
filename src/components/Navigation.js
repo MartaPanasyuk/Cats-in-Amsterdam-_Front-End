@@ -14,10 +14,6 @@ export const Navigation = () => {
   return (
     <Nav>
       <Logo href="/">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/220/220124.png"
-          alt="Cat Radar"
-        />
         Cat<span>Radar</span>
       </Logo>
       <Hamburger onClick={() => setOpen(!open)}>

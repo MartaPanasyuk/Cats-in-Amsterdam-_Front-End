@@ -1,4 +1,5 @@
 export * from "./Login";
 export * from "./SignUp";
 export * from "./HomePage";
-export * from "./CatDetails";
+export * from "./CatPageDetails";
+export * from "./CatGallery";
