@@ -5,31 +5,20 @@ import { useDispatch } from "react-redux";
 export default function CommentForm() {
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
-  const [name, setName] = useState("");
   const [text, setText] = useState("");
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-
-    setName("");
     setText("");
   };
 
-  // dispatch(postNewStory(name, text, image));
+  // dispatch(postNewStory(text));
 
   return (
     <div>
       <>
         {showForm ? (
           <form onSubmit={onFormSubmit}>
-            <div>
-              <label>Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
             <div>
               <label>Text</label>
               <input
