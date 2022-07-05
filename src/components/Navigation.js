@@ -28,7 +28,7 @@ export const Navigation = () => {
           <MenuLink href="/login">Login</MenuLink>
         )}
         <MenuLink href="/catRadar">CatRadar</MenuLink>
-        <MenuLink href="/styled">Empty 2</MenuLink>
+        <MenuLink href="/addCat">Add a New Cat</MenuLink>
       </Menu>
     </Nav>
   );

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { fetchCat } from "../store/cat/thunks";
 import { selectCats } from "../store/cat/selectors";
-import PlotRoute from "../pages/PlotRoute";
 import L from "leaflet";
 
 const CatMap = () => {
@@ -36,9 +35,6 @@ const CatMap = () => {
             zoom={13}
             scrollWheelZoom={true}
           >
-            <PlotRoute
-              points={cats.map((cat) => [cat.latitude, cat.longitude])}
-            />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

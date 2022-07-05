@@ -49,7 +49,10 @@ export default function CatPageDetails() {
       console.log("geolocation available");
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          //console.log("my location", [position.coords.latitude,position.coords.longitude,]);
+          console.log("my location", [
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
           setMyLocation([position.coords.latitude, position.coords.longitude]);
         },
         () => {
