@@ -5,7 +5,11 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
-export default function CatGallery(props) {
+// props = {
+//  points: [[lat, lng], [lat, lng], ...]
+// }
+
+export default function PlotRoute(props) {
   const map = useMap();
   useEffect(() => {
     if (map) {

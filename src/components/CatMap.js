@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { fetchCat } from "../store/cat/thunks";
 import { selectCats } from "../store/cat/selectors";
-import CatGallery from "../pages/CatGallery";
+import PlotRoute from "../pages/PlotRoute";
 import L from "leaflet";
 
 const CatMap = () => {
@@ -36,7 +36,7 @@ const CatMap = () => {
             zoom={13}
             scrollWheelZoom={true}
           >
-            <CatGallery
+            <PlotRoute
               points={cats.map((cat) => [cat.latitude, cat.longitude])}
             />
             <TileLayer

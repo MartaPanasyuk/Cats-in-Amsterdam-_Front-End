@@ -8,6 +8,7 @@ import { selectCatDetails } from "../../store/cat/selectors";
 import { selectToken } from "../../store/user/selectors";
 import { updayteCatSeenTimes } from "../../store/cat/thunks";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import PlotRoute from "../PlotRoute";
 import CommentForm from "../../components/CommentForm";
 import StarRating from "../../components/StarRating";
 
@@ -22,6 +23,8 @@ export default function CatPageDetails() {
   const URL = `https://api.geoapify.com/v1/geocode/reverse`;
 
   const [address, setAddress] = useState("");
+  const [myLocation, setMyLocation] = useState(null); // [lat lon]
+  //console.log("mylocationMarta", myLocation);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -41,6 +44,27 @@ export default function CatPageDetails() {
     //console.log(address);
   }, [catDetails, URL]);
 
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      console.log("geolocation available");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          //console.log("my location", [position.coords.latitude,position.coords.longitude,]);
+          setMyLocation([position.coords.latitude, position.coords.longitude]);
+        },
+        () => {
+          console.log("Unable to retrieve your location");
+        }
+      );
+    } else {
+      console.log("geolocation not available");
+    }
+  };
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
+
   useEffect(() => {
     dispatch(fetchCatWithInfo(id));
   }, [dispatch, id]);
@@ -54,6 +78,7 @@ export default function CatPageDetails() {
 
   return (
     <div>
+      <button onClick={getCurrentLocation}>Get location</button>
       <div key={catDetails.id}>
         <h2>{catDetails.name}</h2>
         <img src={catDetails.picture} alt={catDetails.title} />
@@ -92,12 +117,9 @@ export default function CatPageDetails() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker key={address.name} position={[address.lat, address.lon]}>
-            <Popup>
-              <p>{address.address_line1}</p>
-              <p>{address.address_line2}</p>
-            </Popup>
-          </Marker>
+          <PlotRoute
+            points={[myLocation, [catDetails.latitude, catDetails.longitude]]}
+          />
         </MapContainer>
       ) : (
         ""
@@ -105,3 +127,25 @@ export default function CatPageDetails() {
     </div>
   );
 }
+
+/*
+<Marker key={address.name} position={[address.lat, address.lon]}>
+            <Popup>
+              <p>{address.address_line1}</p>
+              <p>{address.address_line2}</p>
+            </Popup>
+          </Marker>
+
+
+
+const routingControl = L.Routing.control({
+         waypoints: [
+           L.latLng( parseFloat(sourceCity.lat), parseFloat(sourceCity.lng) ),
+           L.latLng( parseFloat(destinationCity.lat), parseFloat(destinationCity.lng) )
+         ],
+ }).addTo(map);
+
+
+
+
+*/
