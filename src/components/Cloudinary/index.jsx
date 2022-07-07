@@ -1,8 +1,7 @@
 import "./style.css";
-import { useState } from "react";
 
 export default function Cloudinary(props) {
-  const [image, setImage] = useState();
+  const image = props.image;
 
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -18,8 +17,7 @@ export default function Cloudinary(props) {
     );
 
     const file = await res.json();
-    console.log("file", file);
-    setImage(file.url);
+    props.setImage(file.url);
   };
 
   return (

@@ -44,16 +44,17 @@ export const postNewComment = (text, catId) => async (dispatch, getState) => {
     const userId = getState().user.profile.id;
     const token = getState().user.token;
     const response = await axios.post(
-      `${API_URL}/artworks/picture/auction`,
+      `${API_URL}/cats/:id`,
       {
         text: text,
         userId: userId,
+        catId: catId,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     //console.log("response", response.data);
     //dispatch(
-    //showMessageWithTimeout("success", false, "You Art is Posted!", 2000)
+    //showMessageWithTimeout("success", false, "You Comment is Posted!", 2000)
     //);
   } catch (e) {
     console.log(e.message);
@@ -61,3 +62,30 @@ export const postNewComment = (text, catId) => async (dispatch, getState) => {
 };
 
 //Create a new Cat
+export const postNewCat =
+  (name, image, description, myLocation) => async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+      const latitude = myLocation.latitude;
+      const longitude = myLocation.longitude;
+      const response = await axios.post(
+        `${API_URL}/cats/addCat`,
+        {
+          name: name,
+          picture: image,
+          description: description,
+          latitude,
+          longitude,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("response", response);
+      //dispatch(
+      //showMessageWithTimeout("success", false, "You Cat is Posted!", 2000)
+      //);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+//// { latitude: 1231, longitude: 123 } myLocation.latitude,myLocation.longitude,

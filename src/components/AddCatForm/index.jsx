@@ -1,15 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Cloudinary from "../Cloudinary";
+import { postNewCat } from "../../store/cat/thunks";
+import { useDispatch } from "react-redux";
 
 export default function AddCatForm() {
+  const dispatch = useDispatch();
   const [myLocation, setMyLocation] = useState(null); // { latitude: 1231, longitude: 123 }
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    //dispatch(postNewArtWork(name, minimumBid, imageUrl));
+    dispatch(postNewCat(name, image, description, myLocation));
     setName("");
     setDescription("");
   };
@@ -33,7 +37,7 @@ export default function AddCatForm() {
     }
   };
 
-  console.log("my location", myLocation);
+  //console.log("my location", myLocation);
 
   useEffect(() => {
     getCurrentLocation();
@@ -53,7 +57,6 @@ export default function AddCatForm() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div></div>
         <div>
           <label>Description</label>
           <input
@@ -62,7 +65,7 @@ export default function AddCatForm() {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <Cloudinary />
+        <Cloudinary image={image} setImage={setImage} />
         <button type="submit">Post a New Cat</button>
       </form>
     </div>

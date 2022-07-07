@@ -7,12 +7,13 @@ import { fetchCatWithInfo } from "../../store/cat/thunks";
 import { selectCatDetails } from "../../store/cat/selectors";
 import { selectToken } from "../../store/user/selectors";
 import { updayteCatLike } from "../../store/cat/thunks";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import PlotRoute from "../PlotRoute";
 import CommentForm from "../../components/CommentForm";
 import StarRating from "../../components/StarRating";
+import AddImgLocation from "../../components/AddImgLocation";
 import { BsFillHeartFill } from "react-icons/bs";
-
+import { LatLng, latLng, Point } from "leaflet";
 export default function CatPageDetails() {
   const dispatch = useDispatch();
   const params = useParams();
@@ -80,6 +81,14 @@ export default function CatPageDetails() {
       </div>
     );
 
+  const calculateSpread = (lat, long, points) => {
+    const ll = new LatLng(lat, long);
+    const distances = points.map((point) =>
+      ll.distanceTo(new LatLng(point[0], point[1]))
+    ); // Calculate all the distances to all the points
+    return Math.max(...distances);
+  };
+
   return (
     <div>
       <button onClick={getCurrentLocation}>Get location</button>
@@ -101,7 +110,7 @@ export default function CatPageDetails() {
         {catDetails.comments.map((c) => (
           <p>{c.text}</p>
         ))}
-        <button>Hev You seen me?</button>
+        <AddImgLocation />
         <p>Location</p>
         {token ? (
           <CommentForm />
@@ -129,6 +138,24 @@ export default function CatPageDetails() {
             <PlotRoute
               points={[myLocation, [catDetails.latitude, catDetails.longitude]]}
             />
+            <Circle
+              center={[catDetails.latitude, catDetails.longitude]}
+              radius={calculateSpread(
+                catDetails.latitude,
+                catDetails.longitude,
+                catDetails.images.map((image) => [
+                  image.latitude,
+                  image.longitude,
+                ])
+              )}
+            />
+            {/* For debugging, uncomment this */}
+            {/* {catDetails.images.map((image) => (
+              <Marker
+                opacity={0.5}
+                position={[image.latitude, image.longitude]}
+              />
+            ))} */}
           </MapContainer>
         ) : (
           ""
