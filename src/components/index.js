@@ -4,5 +4,4 @@ export * from "./CatMap";
 export * from "./CommentForm";
 export * from "./StarRating";
 export * from "./AddCatForm";
-export * from "./Dropzone";
-export * from "./ImgeList";
+export * from "./Cloudinary";

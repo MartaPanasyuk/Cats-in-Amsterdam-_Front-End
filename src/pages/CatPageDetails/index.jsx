@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import { fetchCatWithInfo } from "../../store/cat/thunks";
 import { selectCatDetails } from "../../store/cat/selectors";
 import { selectToken } from "../../store/user/selectors";
-import { updayteCatSeenTimes } from "../../store/cat/thunks";
+import { updayteCatLike } from "../../store/cat/thunks";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import PlotRoute from "../PlotRoute";
 import CommentForm from "../../components/CommentForm";
 import StarRating from "../../components/StarRating";
+import { BsFillHeartFill } from "react-icons/bs";
 
 export default function CatPageDetails() {
   const dispatch = useDispatch();
@@ -88,15 +89,19 @@ export default function CatPageDetails() {
         {catDetails.images.map((c) => (
           <img src={c.url} alt={catDetails.title} />
         ))}
-        <p>Seen Times:{catDetails.seenTime}</p>{" "}
-        <button onClick={() => dispatch(updayteCatSeenTimes(catDetails.id))}>
-          Hev You seen me?
+        <p>
+          <BsFillHeartFill />
+          {catDetails.like}
+        </p>{" "}
+        <button onClick={() => dispatch(updayteCatLike(catDetails.id))}>
+          Like
         </button>
         <p>Rate the cat</p>
         <StarRating />
         {catDetails.comments.map((c) => (
           <p>{c.text}</p>
         ))}
+        <button>Hev You seen me?</button>
         <p>Location</p>
         {token ? (
           <CommentForm />
@@ -104,51 +109,31 @@ export default function CatPageDetails() {
           <p>You need to Login to leave the comment</p>
         )}
       </div>
-      {address ? (
-        <MapContainer
-          style={{
-            height: "40vw",
-            width: "60vw",
-            maxWidth: "800px",
-            maxHeight: "500px",
-          }}
-          center={[52.36994, 4.906]}
-          zoom={13}
-          scrollWheelZoom={true}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <PlotRoute
-            points={[myLocation, [catDetails.latitude, catDetails.longitude]]}
-          />
-        </MapContainer>
-      ) : (
-        ""
-      )}
+      <div>
+        {address ? (
+          <MapContainer
+            style={{
+              height: "40vw",
+              width: "60vw",
+              maxWidth: "800px",
+              maxHeight: "500px",
+            }}
+            center={[52.36994, 4.906]}
+            zoom={13}
+            scrollWheelZoom={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <PlotRoute
+              points={[myLocation, [catDetails.latitude, catDetails.longitude]]}
+            />
+          </MapContainer>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }
-
-/*
-<Marker key={address.name} position={[address.lat, address.lon]}>
-            <Popup>
-              <p>{address.address_line1}</p>
-              <p>{address.address_line2}</p>
-            </Popup>
-          </Marker>
-
-
-
-const routingControl = L.Routing.control({
-         waypoints: [
-           L.latLng( parseFloat(sourceCity.lat), parseFloat(sourceCity.lng) ),
-           L.latLng( parseFloat(destinationCity.lat), parseFloat(destinationCity.lng) )
-         ],
- }).addTo(map);
-
-
-
-
-*/

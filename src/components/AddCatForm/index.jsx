@@ -1,7 +1,6 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
-import Dropzone from "../Dropzone";
-import ImageList from "../ImgeList";
+import Cloudinary from "../Cloudinary";
 
 export default function AddCatForm() {
   const [myLocation, setMyLocation] = useState(null); // { latitude: 1231, longitude: 123 }
@@ -40,10 +39,6 @@ export default function AddCatForm() {
     getCurrentLocation();
   }, []);
 
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
-  }, []);
-
   return (
     <div>
       <div>
@@ -58,9 +53,7 @@ export default function AddCatForm() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div>
-          <Dropzone onDrop={onDrop} accept={"image/*"} />
-        </div>
+        <div></div>
         <div>
           <label>Description</label>
           <input
@@ -69,6 +62,7 @@ export default function AddCatForm() {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+        <Cloudinary />
         <button type="submit">Post a New Cat</button>
       </form>
     </div>
@@ -77,9 +71,5 @@ export default function AddCatForm() {
 
 /*
 
-setMyLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
 
 */

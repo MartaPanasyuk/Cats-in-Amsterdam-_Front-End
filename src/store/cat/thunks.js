@@ -27,8 +27,8 @@ export const fetchCatWithInfo = (catId) => async (dispatch, getState) => {
   }
 };
 
-// PUT change the number of  seenigTimes
-export const updayteCatSeenTimes = (catId) => async (dispatch, getState) => {
+// PUT Increasing  Likes
+export const updayteCatLike = (catId) => async (dispatch, getState) => {
   try {
     const response = await axios.put(`${API_URL}/cats/${catId}`);
     //console.log("response", response.data);
@@ -38,7 +38,7 @@ export const updayteCatSeenTimes = (catId) => async (dispatch, getState) => {
   }
 };
 
-////Create a new Comment
+//Create a new Comment
 export const postNewComment = (text, catId) => async (dispatch, getState) => {
   try {
     const userId = getState().user.profile.id;
@@ -59,3 +59,5 @@ export const postNewComment = (text, catId) => async (dispatch, getState) => {
     console.log(e.message);
   }
 };
+
+//Create a new Cat
