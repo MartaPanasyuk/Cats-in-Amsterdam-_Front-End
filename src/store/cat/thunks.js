@@ -1,5 +1,6 @@
 import axios from "axios";
-import { catFetched, catDetailsFatched } from "../cat/slice";
+import { catFetched, catDetailsFatched, catImageFetched } from "../cat/slice";
+import { showMessageWithTimeout } from "../appState/thunks";
 
 const API_URL = `http://localhost:4000`;
 
@@ -79,13 +80,38 @@ export const postNewCat =
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log("response", response);
-      //dispatch(
-      //showMessageWithTimeout("success", false, "You Cat is Posted!", 2000)
-      //);
+      //console.log("response", response);
+      dispatch(showMessageWithTimeout("success", true, "You Cat Is Posted!"));
     } catch (e) {
       console.log(e.message);
     }
   };
+
+//Add Image and Location to the existing Cat
+export const updateCat = (image, myLocation) => async (dispatch, getState) => {
+  try {
+    const token = getState().user.token;
+    const userId = getState().user.profile.id;
+    const catId = getState().cat.details.id;
+    const latitude = myLocation.latitude;
+    const longitude = myLocation.longitude;
+    const response = await axios.post(
+      `${API_URL}/cats/${catId}`,
+      {
+        url: image,
+        latitude,
+        longitude,
+        userId,
+        catId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    // console.log("response", response);
+    dispatch(showMessageWithTimeout("success", true, "You Image Is Posted!"));
+    dispatch(catImageFetched(response.data));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 
 //// { latitude: 1231, longitude: 123 } myLocation.latitude,myLocation.longitude,

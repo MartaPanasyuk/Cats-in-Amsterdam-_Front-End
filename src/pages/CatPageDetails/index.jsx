@@ -14,6 +14,8 @@ import StarRating from "../../components/StarRating";
 import AddImgLocation from "../../components/AddImgLocation";
 import { BsFillHeartFill } from "react-icons/bs";
 import { LatLng, latLng, Point } from "leaflet";
+import { FaPaw } from "react-icons/fa";
+
 export default function CatPageDetails() {
   const dispatch = useDispatch();
   const params = useParams();
@@ -110,7 +112,14 @@ export default function CatPageDetails() {
         {catDetails.comments.map((c) => (
           <p>{c.text}</p>
         ))}
-        <AddImgLocation />
+        {token ? (
+          <AddImgLocation />
+        ) : (
+          <p>
+            Have you seen Me? <FaPaw />
+            You need to Login to post my picture
+          </p>
+        )}
         <p>Location</p>
         {token ? (
           <CommentForm />
@@ -128,7 +137,7 @@ export default function CatPageDetails() {
               maxHeight: "500px",
             }}
             center={[52.36994, 4.906]}
-            zoom={13}
+            zoom={25}
             scrollWheelZoom={true}
           >
             <TileLayer

@@ -3,20 +3,20 @@ import { useState, useEffect } from "react";
 import Cloudinary from "../Cloudinary";
 import { useDispatch } from "react-redux";
 import { FaPaw } from "react-icons/fa";
-//import { postNewStory } from "../store/space/thunks";
+import { updateCat } from "../../store/cat/thunks";
 
 export default function AddImgLocation() {
   const [myLocation, setMyLocation] = useState(null); // { latitude: 1231, longitude: 123 }
 
   const dispatch = useDispatch();
+
   const [showForm, setShowForm] = useState(false);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    // dispatch(postNewStory(name, content, image));
-    setImage("");
-    setMyLocation("");
+    dispatch(updateCat(image, myLocation));
+    setImage(null);
   };
 
   const getCurrentLocation = () => {
@@ -50,6 +50,7 @@ export default function AddImgLocation() {
         {showForm ? (
           <form onSubmit={onFormSubmit}>
             <Cloudinary image={image} setImage={setImage} />
+            <button>Post a new photo</button>
             <button onClick={() => setShowForm(false)}>Discard</button>
           </form>
         ) : (
