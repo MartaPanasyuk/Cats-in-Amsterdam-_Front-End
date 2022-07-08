@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { postNewComment } from "../../store/cat/thunks";
 
 export default function CommentForm() {
   const dispatch = useDispatch();
@@ -9,10 +10,9 @@ export default function CommentForm() {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    dispatch(postNewComment(text));
     setText("");
   };
-
-  // dispatch(postNewStory(text));
 
   return (
     <div>

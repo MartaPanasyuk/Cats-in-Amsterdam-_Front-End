@@ -1,5 +1,10 @@
 import axios from "axios";
-import { catFetched, catDetailsFatched, catImageFetched } from "../cat/slice";
+import {
+  catFetched,
+  catDetailsFatched,
+  catImageFetched,
+  catCommentFetched,
+} from "../cat/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 
 const API_URL = `http://localhost:4000`;
@@ -40,12 +45,13 @@ export const updayteCatLike = (catId) => async (dispatch, getState) => {
 };
 
 //Create a new Comment
-export const postNewComment = (text, catId) => async (dispatch, getState) => {
+export const postNewComment = (text) => async (dispatch, getState) => {
   try {
-    const userId = getState().user.profile.id;
     const token = getState().user.token;
+    const userId = getState().user.profile.id;
+    const catId = getState().cat.details.id;
     const response = await axios.post(
-      `${API_URL}/cats/:id`,
+      `${API_URL}/cats/comment/${catId}`,
       {
         text: text,
         userId: userId,
@@ -53,10 +59,9 @@ export const postNewComment = (text, catId) => async (dispatch, getState) => {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    //console.log("response", response.data);
-    //dispatch(
-    //showMessageWithTimeout("success", false, "You Comment is Posted!", 2000)
-    //);
+    console.log("response", response.data);
+    dispatch(catCommentFetched(response.data));
+    showMessageWithTimeout("success", false, "You Comment is Posted!", 2000);
   } catch (e) {
     console.log(e.message);
   }

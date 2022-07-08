@@ -18,10 +18,25 @@ export const catSlice = createSlice({
     catImageFetched: (state, action) => {
       state.details.images = [...state.details.images, action.payload];
     },
+    catCommentFetched: (state, action) => {
+      state.details.comments = [...state.details.comments, action.payload];
+    },
   },
 });
 
-export const { catFetched, catDetailsFatched, catImageFetched } =
-  catSlice.actions;
+export const {
+  catFetched,
+  catDetailsFatched,
+  catImageFetched,
+  catCommentFetched,
+} = catSlice.actions;
 
 export default catSlice.reducer;
+
+/*
+
+
+ 
+
+
+    */

@@ -93,7 +93,6 @@ export default function CatPageDetails() {
 
   return (
     <div>
-      <button onClick={getCurrentLocation}>Get location</button>
       <div key={catDetails.id}>
         <h2>{catDetails.name}</h2>
         <img src={catDetails.picture} alt={catDetails.title} />
@@ -107,25 +106,31 @@ export default function CatPageDetails() {
         <button onClick={() => dispatch(updayteCatLike(catDetails.id))}>
           Like
         </button>
-        <p>Rate the cat</p>
+        <h3>Rate the cat</h3>
         <StarRating />
-        {catDetails.comments.map((c) => (
-          <p>{c.text}</p>
-        ))}
-        {token ? (
-          <AddImgLocation />
-        ) : (
-          <p>
-            Have you seen Me? <FaPaw />
-            You need to Login to post my picture
-          </p>
-        )}
-        <p>Location</p>
-        {token ? (
-          <CommentForm />
-        ) : (
-          <p>You need to Login to leave the comment</p>
-        )}
+        <div>
+          {token ? (
+            <AddImgLocation />
+          ) : (
+            <h3>
+              Have you seen Me? <FaPaw />
+              You need to Login to post my picture
+            </h3>
+          )}
+        </div>
+        <div>
+          {catDetails.comments.map((comment) => (
+            <div>
+              <p>{comment.user.name}</p>
+              <p>{comment.text}</p>
+            </div>
+          ))}
+          {token ? (
+            <CommentForm />
+          ) : (
+            <h3>You need to Login to leave the comment</h3>
+          )}
+        </div>
       </div>
       <div>
         {address ? (
