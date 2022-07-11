@@ -4,6 +4,7 @@ import {
   catDetailsFatched,
   catImageFetched,
   catCommentFetched,
+  catRating,
 } from "../cat/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 
@@ -119,4 +120,37 @@ export const updateCat = (image, myLocation) => async (dispatch, getState) => {
   }
 };
 
-//// { latitude: 1231, longitude: 123 } myLocation.latitude,myLocation.longitude,
+//Get All Categories
+export const fetchCategories = () => async (dispatch, getState) => {
+  try {
+    const response = await axios.get(`${API_URL}/rating`);
+    const res = response.data;
+    console.log("response", res);
+    //dispatch(catRating(res));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+/*
+// Add Cat Rating
+export const rateCat = (stars) => async (dispatch, getState) => {
+  try {
+    const token = getState().user.token;
+    const response = await axios.post(
+      `${API_URL}/cats/addCat`,
+      {
+        stars,
+        categoryId,
+        catId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    ); 
+    //console.log("response", response);
+    //dispatch(showMessageWithTimeout("success", true, "You Cat Is Posted!"));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+*/

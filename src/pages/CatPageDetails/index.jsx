@@ -107,7 +107,9 @@ export default function CatPageDetails() {
           Like
         </button>
         <h3>Rate the cat</h3>
-        <StarRating />
+        <StarRating category="fluffy" catId="2" />
+        <StarRating category="wekrf" catId="2" />
+        <StarRating category="flulkdjgfjkffy" catId="2" />
         <div>
           {token ? (
             <AddImgLocation />
