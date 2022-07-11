@@ -3,10 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchCatWithInfo } from "../../store/cat/thunks";
-import { selectCatDetails } from "../../store/cat/selectors";
+import {
+  fetchCatWithInfo,
+  updayteCatLike,
+  allCategories,
+} from "../../store/cat/thunks";
+import { selectCatDetails, selectCategories } from "../../store/cat/selectors";
 import { selectToken } from "../../store/user/selectors";
-import { updayteCatLike } from "../../store/cat/thunks";
 import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import PlotRoute from "../PlotRoute";
 import CommentForm from "../../components/CommentForm";
@@ -23,6 +26,8 @@ export default function CatPageDetails() {
 
   const token = useSelector(selectToken);
   const catDetails = useSelector(selectCatDetails);
+  const categories = useSelector(selectCategories);
+  //console.log(categories);
 
   const URL = `https://api.geoapify.com/v1/geocode/reverse`;
 
@@ -73,6 +78,7 @@ export default function CatPageDetails() {
   }, []);
 
   useEffect(() => {
+    dispatch(allCategories());
     dispatch(fetchCatWithInfo(id));
   }, [dispatch, id]);
 
@@ -107,9 +113,13 @@ export default function CatPageDetails() {
           Like
         </button>
         <h3>Rate the cat</h3>
-        <StarRating category="fluffy" catId="2" />
-        <StarRating category="wekrf" catId="2" />
-        <StarRating category="flulkdjgfjkffy" catId="2" />
+        {categories.map((category) => (
+          <StarRating
+            category={category.title}
+            categoryId={category.id}
+            catId={catDetails.id}
+          />
+        ))}
         <div>
           {token ? (
             <AddImgLocation />

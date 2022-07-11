@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { fetchCat } from "../store/cat/thunks";
 import { selectCats } from "../store/cat/selectors";
@@ -48,11 +49,13 @@ const CatMap = () => {
               >
                 {/* when we click on the marker, we see the popup */}
                 <Popup>
-                  <img
-                    alt={cat.name}
-                    style={{ width: "125px", borderRadius: "0.5em" }}
-                    src={cat.picture}
-                  />
+                  <Link to={`/cats/${cat.id}`}>
+                    <img
+                      alt={cat.name}
+                      style={{ width: "125px", borderRadius: "0.5em" }}
+                      src={cat.picture}
+                    />{" "}
+                  </Link>
                   <p>{cat.name}</p>
                 </Popup>
               </Marker>
