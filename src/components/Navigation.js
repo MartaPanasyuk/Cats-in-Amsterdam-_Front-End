@@ -23,7 +23,10 @@ export const Navigation = () => {
       </Hamburger>
       <Menu open={open}>
         {token ? (
-          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+          <>
+            <MenuLink href="/cats/me">My Space</MenuLink>
+            <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+          </>
         ) : (
           <MenuLink href="/login">Login</MenuLink>
         )}

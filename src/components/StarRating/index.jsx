@@ -60,5 +60,4 @@ export default function StarRating(props) {
       />
     </div>
 
-
 */
