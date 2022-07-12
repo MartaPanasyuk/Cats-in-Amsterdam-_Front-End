@@ -1,11 +1,3 @@
-.home {
-  background-image: url(../../images/vfa_dXe3S3Y);
-  background-size: cover;
-  background-position: center;
-  background-position-y: 120%;
-  min-height: 100vh;
-  margin: 0;
-}
 .container {
   max-width: 980px;
   margin: 0, auto;

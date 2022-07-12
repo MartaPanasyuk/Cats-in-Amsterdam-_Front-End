@@ -7,6 +7,7 @@ import { getDistance } from "geolib";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
 import PlotRoute from "../PlotRoute";
+import L from "leaflet";
 
 export default function MySpace() {
   const dispatch = useDispatch();
@@ -51,9 +52,15 @@ export default function MySpace() {
     return near;
   });
   //console.log("near", filteredCats);
-  const latitude = filteredCats.map((cat, i) => [cat.latitude, cat.longitude]);
 
-  console.log("latitude", latitude[0]);
+  //marker icon
+  const meIcon = L.icon({
+    iconUrl: require("../../images/person.png"),
+    iconSize: [40, 40],
+  });
+
+  //const marker = L.marker([L.latLng], { icon: meIcon }).addTo(map);
+
   return (
     <div>
       {filteredCats.map((cat) => (
@@ -77,11 +84,33 @@ export default function MySpace() {
             {filteredCats.map((cat) => (
               <PlotRoute points={[myLocation, [cat.latitude, cat.longitude]]} />
             ))}
-
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            <Marker
+              key={myLocation}
+              position={[myLocation[0], myLocation[1]]}
+              icon={meIcon}
+            >
+              <Popup>
+                <h3>It's Me!!!</h3>
+              </Popup>
+            </Marker>
+            {filteredCats.map((cat) => (
+              <Marker key={cat.name} position={[cat.latitude, cat.longitude]}>
+                <Popup>
+                  <Link to={`/cats/${cat.id}`}>
+                    <img
+                      alt={cat.name}
+                      style={{ width: "125px", borderRadius: "0.5em" }}
+                      src={cat.picture}
+                    />{" "}
+                  </Link>
+                  <p>{cat.name}</p>
+                </Popup>
+              </Marker>
+            ))}
           </MapContainer>
         </div>
       ) : (
@@ -90,3 +119,8 @@ export default function MySpace() {
     </div>
   );
 }
+
+/*
+
+CataLog
+*/

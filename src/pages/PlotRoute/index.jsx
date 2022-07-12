@@ -21,6 +21,7 @@ export default function PlotRoute(props) {
       const newRoute = L.Routing.control({
         show: false,
         waypoints: props.points.map((p) => L.latLng(p[0], p[1])),
+        createMarker: () => null,
       });
 
       newRoute.addTo(map);

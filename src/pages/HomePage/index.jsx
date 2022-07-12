@@ -5,52 +5,44 @@ import { fetchCat } from "../../store/cat/thunks";
 import { selectCats } from "../../store/cat/selectors";
 import { Link } from "react-router-dom";
 import { CatMap } from "../../components";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const cats = useSelector(selectCats);
 
   useEffect(() => {
     dispatch(fetchCat());
   }, [dispatch]);
 
-  const cats = useSelector(selectCats);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
 
   return (
-    <div className="home">
+    <div>
       {!cats ? (
         <p>Loading</p>
       ) : (
-        <ImageList xs={{ width: 100, height: 450 }}>
-          <ImageListItem key="Subheader" cols={12}></ImageListItem>
-          {cats.map((cat) => (
-            <ImageListItem key={cat.id}>
-              <img
-                src={`${cat.picture}?w=248&fit=crop&auto=format`}
-                srcSet={`${cat.picture}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={cat.name}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={cat.name}
-                actionIcon={
-                  <IconButton
-                    sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                    aria-label={`info about fnvsnb`}
-                  >
-                    <Link to={`/cats/${cat.id}`}>
-                      <InfoIcon sx={{ color: "rgba(255, 255, 255, 0.54)" }} />
-                    </Link>
-                  </IconButton>
-                }
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <>
+          <Slider {...settings}>
+            {cats.map((cat) => (
+              <div className="card">
+                <div className="card-top">
+                  <img src={cat.picture} alt={cat.name} />
+                  <h2>{cat.name}</h2>
+                </div>
+                <div className="card-bottom"></div>
+              </div>
+            ))}
+          </Slider>
+        </>
       )}
       <div>
         <CatMap />
