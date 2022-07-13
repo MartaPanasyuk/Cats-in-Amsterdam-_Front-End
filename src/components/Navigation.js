@@ -53,13 +53,14 @@ const MenuLink = styled.a`
 `;
 
 const Nav = styled.div`
-  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #F8F9F9 
+  background: #fff;
   /* position: absolute; */
+  max-width: 980px;
+  margin: auto;
   top: 0;
   left: 0;
   right: 0;
@@ -98,10 +99,8 @@ const Hamburger = styled.div`
 const Menu = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  /*align-items: center; */
   position: relative;
-  max-width: 980px;
-  margin: auto;
 
   @media (max-width: 780px) {
     overflow: hidden;
