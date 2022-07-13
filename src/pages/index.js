@@ -5,3 +5,4 @@ export * from "./CatPageDetails";
 export * from "./PlotRoute";
 export * from "./CatRadar";
 export * from "./MySpace";
+export * from "./CataLog";

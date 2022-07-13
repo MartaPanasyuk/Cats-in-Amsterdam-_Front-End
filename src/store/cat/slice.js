@@ -11,6 +11,7 @@ export const catSlice = createSlice({
   initialState,
   reducers: {
     catFetched: (state, action) => {
+      console.log(action.payload, "cats");
       state.catlist = action.payload;
     },
     catDetailsFatched: (state, action) => {

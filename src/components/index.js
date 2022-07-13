@@ -6,3 +6,4 @@ export * from "./StarRating";
 export * from "./AddCatForm";
 export * from "./Cloudinary";
 export * from "./AddImgLocation";
+export * from "./CatLogPage";

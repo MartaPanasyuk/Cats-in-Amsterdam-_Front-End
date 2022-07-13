@@ -8,6 +8,7 @@ import { HomePage, Login, SignUp, CatRadar } from "./pages";
 import CatPageDetails from "./pages/CatPageDetails";
 import AddCatForm from "./components/AddCatForm";
 import MySpace from "./pages/MySpace";
+import CataLog from "./pages/CataLog";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/cats/:id" element={<CatPageDetails />} />
         <Route path="/catRadar" element={<CatRadar />} />
+        <Route path="/CataLog" element={<CataLog />} />
         <Route path="/addCat" element={<AddCatForm />} />
         <Route path="/cats/me" element={<MySpace />} />
         <Route path="/signup" element={<SignUp />} />

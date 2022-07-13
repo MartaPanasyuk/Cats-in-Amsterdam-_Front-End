@@ -47,11 +47,10 @@ export default function MySpace() {
       { latitude: cat.latitude, longitude: cat.longitude },
       { latitude: myLocation[0], longitude: myLocation[1] }
     );
-    //console.log("distance to cat", cat.id, distance);
+
     const near = distance < 3000;
     return near;
   });
-  //console.log("near", filteredCats);
 
   //marker icon
   const meIcon = L.icon({
