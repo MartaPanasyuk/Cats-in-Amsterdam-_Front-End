@@ -18,7 +18,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="App-wrapper">
       <Navigation />
       <MessageBox />
       <Routes>

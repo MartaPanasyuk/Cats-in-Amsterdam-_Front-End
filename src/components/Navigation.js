@@ -76,11 +76,6 @@ const Logo = styled.a`
     font-weight: 300;
     font-size: 1.3rem;
   }
-  img {
-    width: 65px;
-    height: 65px;
-    color: #17202a;
-  }
 `;
 
 const Hamburger = styled.div`
@@ -102,9 +97,11 @@ const Hamburger = styled.div`
 
 const Menu = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
+  max-width: 980px;
+  margin: auto;
 
   @media (max-width: 780px) {
     overflow: hidden;

@@ -1,6 +1,14 @@
+.HomePage_wrapper {
+  width: 100vh;
+  background-color: #f4d58d;
+  min-height: 100vh;
+}
+
 .container {
   max-width: 980px;
-  margin: 0, auto;
+  margin: auto;
+  width: 100%;
+  padding-left: 30px;
 }
 
 .CatContainer {

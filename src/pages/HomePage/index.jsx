@@ -53,26 +53,28 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      {!cats ? (
-        <p>Loading</p>
-      ) : (
-        <div>
-          <Slider {...settings}>
-            {cats.map((cat) => (
-              <div className="card">
-                <div className="card-top">
-                  <img src={cat.picture} alt={cat.name} />
-                  <h2>{cat.name}</h2>
+    <div className="HomePage_wrapper">
+      <div className="container">
+        {!cats ? (
+          <p>Loading</p>
+        ) : (
+          <div>
+            <Slider {...settings}>
+              {cats.map((cat) => (
+                <div className="card">
+                  <div className="card-top">
+                    <img src={cat.picture} alt={cat.name} />
+                    <h2>{cat.name}</h2>
+                  </div>
+                  <div className="card-bottom"></div>
                 </div>
-                <div className="card-bottom"></div>
-              </div>
-            ))}
-          </Slider>
+              ))}
+            </Slider>
+          </div>
+        )}
+        <div>
+          <CatMap />
         </div>
-      )}
-      <div>
-        <CatMap />
       </div>
     </div>
   );
