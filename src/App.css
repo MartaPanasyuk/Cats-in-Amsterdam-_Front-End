@@ -1,21 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lora&family=Source+Sans+Pro&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-img {
-  display: block;
-  width: 100%;
-}
-
 .container {
   max-width: 980px;
   margin: auto;
 }
 
 .App-wrapper {
-  background-color: #ffc8dd;
+  background-color: #f7ede2;
+  /*background-image: url("../src/images/image-from-rawpixel-id-2210775-jpeg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-position-x: 18%;
+  */
+  color: #424242;
 }

@@ -12,43 +12,55 @@ export const Navigation = () => {
   const token = useSelector(selectToken);
 
   return (
-    <Nav>
-      <Logo href="/">
-        Cat<span>Radar</span>
-      </Logo>
-      <Hamburger onClick={() => setOpen(!open)}>
-        <span />
-        <span />
-        <span />
-      </Hamburger>
-      <Menu open={open}>
-        {token ? (
-          <>
-            <MenuLink href="/cats/me">My Space</MenuLink>
-            <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-          </>
-        ) : (
-          <MenuLink href="/login">Login</MenuLink>
-        )}
-        <MenuLink href="/catRadar">CatRadar</MenuLink>
-        <MenuLink href="/CataLog">CataLog</MenuLink>
-        <MenuLink href="/addCat">Add a New Cat</MenuLink>
-      </Menu>
-    </Nav>
+    <Header>
+      <Nav>
+        <Logo href="/">
+          Cat<span>Radar</span>
+        </Logo>
+        <Hamburger onClick={() => setOpen(!open)}>
+          <span />
+          <span />
+          <span />
+        </Hamburger>
+        <Menu open={open}>
+          {token ? (
+            <>
+              <MenuLink href="/cats/me">My Space</MenuLink>
+              <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+            </>
+          ) : (
+            <MenuLink href="/login">Login</MenuLink>
+          )}
+          <MenuLink href="/catRadar">CatRadar</MenuLink>
+          <MenuLink href="/CataLog">CataLog</MenuLink>
+          <MenuLink href="/addCat">Add a New Cat</MenuLink>
+        </Menu>
+      </Nav>
+    </Header>
   );
 };
 
+const Header = styled.div`
+  background: #f5cac3;
+`;
+
 const MenuLink = styled.a`
-  padding: 1rem 2rem;
-  cursor: pointer;
-  text-align: center;
+  font-size: 18px;
+  color: #424242;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-top: 20px;
+  margin-right: 5px;
+  padding-right: 18px;
   text-decoration: none;
-  color: #17202a;
-  transition: all 0.3s ease-in;
-  font-size: 0.9rem;
+  display: flexbox;
+  align-items: center;
+  border-bottom: 2px solid transparent;
 
   &:hover {
-    color: #9cc094;
+    color: #023047;
+    border-bottom: 3px solid #023047;
   }
 `;
 
@@ -57,28 +69,25 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #fff;
+  background: #f5cac3;
   /* position: absolute; */
   max-width: 980px;
   margin: auto;
-  top: 0;
+  height: 150px;
   left: 0;
   right: 0;
 `;
 
 const Logo = styled.a`
-  padding: 1rem 0;
-  color: #17202a;
+  color: #023047;
   text-decoration: none;
   font-weight: 800;
-  font-size: 1.7rem;
-
+  font-size: 30px;
   span {
     font-weight: 300;
     font-size: 1.3rem;
   }
 `;
-
 const Hamburger = styled.div`
   display: none;
   flex-direction: column;
@@ -86,7 +95,7 @@ const Hamburger = styled.div`
   span {
     height: 2px;
     width: 25px;
-    background-color: #17202A
+    background-color: #023047;
     margin-bottom: 4px;
     border-radius: 5px;
   }

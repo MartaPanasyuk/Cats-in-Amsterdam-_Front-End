@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -18,6 +19,7 @@ import AddImgLocation from "../../components/AddImgLocation";
 import { BsFillHeartFill } from "react-icons/bs";
 import { LatLng, latLng, Point } from "leaflet";
 import { FaPaw } from "react-icons/fa";
+import L from "leaflet";
 
 export default function CatPageDetails() {
   const dispatch = useDispatch();
@@ -97,29 +99,58 @@ export default function CatPageDetails() {
     return Math.max(...distances);
   };
 
+  //Map Markers
+  const meIcon = L.icon({
+    iconUrl: require("../../images/navigation.png"),
+    iconSize: [40, 40],
+  });
+
+  const catIcon = L.icon({
+    iconUrl: require("../../images/pin.png"),
+    iconSize: [40, 40],
+  });
+
   return (
-    <div>
-      <div key={catDetails.id}>
+    <div className="Details-page container">
+      <div key={catDetails.id} className="card-wrapper">
         <h2>{catDetails.name}</h2>
-        <img src={catDetails.picture} alt={catDetails.title} />
-        {catDetails.images.map((c) => (
-          <img src={c.url} alt={catDetails.title} />
-        ))}
-        <p>
-          <BsFillHeartFill />
-          {catDetails.like}
-        </p>{" "}
-        <button onClick={() => dispatch(updayteCatLike(catDetails.id))}>
-          Like
-        </button>
-        <h3>Rate the cat</h3>
-        {categories.map((category) => (
-          <StarRating
-            category={category.title}
-            categoryId={category.id}
-            catId={catDetails.id}
+        <div className="Image-wrapper">
+          <img
+            src={catDetails.picture}
+            alt={catDetails.title}
+            className="Image-container"
           />
-        ))}
+          {catDetails.images.map((c) => (
+            <img
+              src={c.url}
+              alt={c.title}
+              key={c.id}
+              className="Image-container"
+            />
+          ))}
+        </div>
+        <div className="btn-container">
+          <button
+            onClick={() => dispatch(updayteCatLike(catDetails.id))}
+            className="btn"
+          >
+            Like
+          </button>
+          <p className="hearts">
+            <BsFillHeartFill />
+            {catDetails.like}
+          </p>{" "}
+        </div>
+        <div className="Rating-wrapper">
+          <h3 className="Rating-header">How Would You Rate This Cat</h3>
+          {categories.map((category) => (
+            <StarRating
+              category={category.title}
+              categoryId={category.id}
+              catId={catDetails.id}
+            />
+          ))}
+        </div>
         <div>
           {token ? (
             <AddImgLocation />
@@ -132,7 +163,7 @@ export default function CatPageDetails() {
         </div>
         <div>
           {catDetails.comments.map((comment) => (
-            <div>
+            <div key={comment.id}>
               <p>{comment.user.name}</p>
               <p>{comment.text}</p>
             </div>
@@ -164,6 +195,29 @@ export default function CatPageDetails() {
             <PlotRoute
               points={[myLocation, [catDetails.latitude, catDetails.longitude]]}
             />
+            <Marker
+              key={myLocation}
+              position={[myLocation[0], myLocation[1]]}
+              icon={meIcon}
+            >
+              <Popup>
+                <h3>You are here!</h3>
+              </Popup>
+            </Marker>
+            <Marker
+              key={catDetails.name}
+              position={[catDetails.latitude, catDetails.longitude]}
+              icon={catIcon}
+            >
+              <Popup>
+                <img
+                  alt={catDetails.name}
+                  style={{ width: "125px", borderRadius: "0.5em" }}
+                  src={catDetails.picture}
+                />
+                <p>{catDetails.name}</p>
+              </Popup>
+            </Marker>
             <Circle
               center={[catDetails.latitude, catDetails.longitude]}
               radius={calculateSpread(

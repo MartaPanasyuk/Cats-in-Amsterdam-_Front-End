@@ -23,10 +23,13 @@ export default function PlotRoute(props) {
         waypoints: props.points.map((p) => L.latLng(p[0], p[1])),
         createMarker: () => null,
       });
-
       newRoute.addTo(map);
       setRoute(newRoute);
     }
   }, [map, props.points]);
+
   return null;
 }
+
+/*
+ */

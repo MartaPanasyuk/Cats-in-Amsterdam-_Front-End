@@ -1,0 +1,60 @@
+.Image-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 200px;
+  height: 250px;
+}
+.Image-container {
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.btn {
+  margin-right: 20px;
+  width: 45px;
+  height: 25px;
+  /* padding: 18px 34px; */
+  display: inline-block;
+  font-size: 10px;
+  color: #f5cac3;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  transition: color 0.7s;
+  background-color: #424242;
+}
+
+.btn:hover {
+  background-color: #023047;
+}
+
+.hearts {
+  font-size: 16px;
+  padding-top: 5px;
+}
+
+.Rating-wrapper {
+  margin-top: 15px;
+  padding-left: 10px;
+  width: 300px;
+  border: 2px solid #424242;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  color: #424242;
+}
+.Rating-header {
+  margin-bottom: 15px;
+}

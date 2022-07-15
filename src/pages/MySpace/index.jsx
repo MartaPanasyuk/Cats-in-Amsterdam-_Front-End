@@ -54,7 +54,7 @@ export default function MySpace() {
 
   //marker icon
   const meIcon = L.icon({
-    iconUrl: require("../../images/person.png"),
+    iconUrl: require("../../images/navigation.png"),
     iconSize: [40, 40],
   });
 

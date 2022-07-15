@@ -8,6 +8,7 @@ import { CatMap } from "../../components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { BsFillHeartFill } from "react-icons/bs";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -19,10 +20,10 @@ const HomePage = () => {
 
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     initialSlide: 0,
     responsive: [
       {
@@ -55,24 +56,34 @@ const HomePage = () => {
   return (
     <div className="HomePage_wrapper">
       <div className="container">
+        <h2>Cats on the Street</h2>
         {!cats ? (
           <p>Loading</p>
         ) : (
-          <div>
+          <div className="image-slider">
             <Slider {...settings}>
               {cats.map((cat) => (
-                <div className="card">
-                  <div className="card-top">
-                    <img src={cat.picture} alt={cat.name} />
-                    <h2>{cat.name}</h2>
+                <div class="flex">
+                  <div class="flex__column">
+                    <div class="speakers-slider__item">
+                      <img src={cat.picture} className="card-img" alt="cats" />
+                      <Link to={`/cats/${cat.id}`}>
+                        <span>{cat.name}</span>
+                      </Link>
+                      <strong>
+                        {cat.like} <BsFillHeartFill />
+                      </strong>
+                    </div>
                   </div>
-                  <div className="card-bottom"></div>
                 </div>
               ))}
             </Slider>
           </div>
         )}
         <div>
+          <h2>Hey, Look wo is here !</h2>
+        </div>
+        <div className="map-wrapper">
           <CatMap />
         </div>
       </div>
@@ -80,40 +91,3 @@ const HomePage = () => {
   );
 };
 export { HomePage };
-
-/*
-
-dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-
-*/
