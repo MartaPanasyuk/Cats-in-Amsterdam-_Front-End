@@ -28,7 +28,7 @@ export default function CatPageDetails() {
 
   const token = useSelector(selectToken);
   const catDetails = useSelector(selectCatDetails);
-  const categories = useSelector(selectCategories);
+  // const categories = useSelector(selectCategories);
   //console.log(categories);
 
   const URL = `https://api.geoapify.com/v1/geocode/reverse`;
@@ -49,7 +49,7 @@ export default function CatPageDetails() {
         console.log("ERROR", error);
       }
     };
-    if (catDetails) {
+    if (catDetails && !address) {
       getLocation();
     }
     //console.log(address);
@@ -113,7 +113,13 @@ export default function CatPageDetails() {
   return (
     <div className="Details-page container">
       <div key={catDetails.id} className="card-wrapper">
-        <h2>{catDetails.name}</h2>
+        <div className="card-header">
+          <h2 className="page-title">{catDetails.name}</h2>
+          <p className="hearts">
+            <BsFillHeartFill />
+            {catDetails.like}
+          </p>{" "}
+        </div>
         <div className="Image-wrapper">
           <img
             src={catDetails.picture}
@@ -134,45 +140,41 @@ export default function CatPageDetails() {
             onClick={() => dispatch(updayteCatLike(catDetails.id))}
             className="btn"
           >
-            Like
+            <h2 className="btn-text">Like</h2>
           </button>
-          <p className="hearts">
-            <BsFillHeartFill />
-            {catDetails.like}
-          </p>{" "}
         </div>
-        <div className="Rating-wrapper">
-          <h3 className="Rating-header">How Would You Rate This Cat</h3>
-          {categories.map((category) => (
+        <div className="Box">
+          <div className="Rating-wrapper">
+            <h3 className="Rating-header">Rate This Cat</h3>
             <StarRating
-              category={category.title}
-              categoryId={category.id}
+              category={"Ffluffiness"}
+              categoryId={1}
               catId={catDetails.id}
             />
-          ))}
-        </div>
-        <div>
-          {token ? (
-            <AddImgLocation />
-          ) : (
-            <h3>
-              Have you seen Me? <FaPaw />
-              You need to Login to post my picture
-            </h3>
-          )}
-        </div>
-        <div>
-          {catDetails.comments.map((comment) => (
-            <div key={comment.id}>
-              <p>{comment.user.name}</p>
-              <p>{comment.text}</p>
-            </div>
-          ))}
-          {token ? (
-            <CommentForm />
-          ) : (
-            <h3>You need to Login to leave the comment</h3>
-          )}
+            <StarRating
+              category={"Purring"}
+              categoryId={2}
+              catId={catDetails.id}
+            />
+            <StarRating
+              category={"Friendliness"}
+              categoryId={3}
+              catId={catDetails.id}
+            />
+          </div>
+
+          <div className="Form-wrapper">
+            {token ? (
+              <AddImgLocation />
+            ) : (
+              <div className="box-text">
+                <h3 className="title">
+                  Have you seen Me? <FaPaw />
+                </h3>
+                <p className="subtitle">You need to Login to post my picture</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div>
@@ -218,7 +220,7 @@ export default function CatPageDetails() {
                 <p>{catDetails.name}</p>
               </Popup>
             </Marker>
-            <Circle
+            {/* <Circle
               center={[catDetails.latitude, catDetails.longitude]}
               radius={calculateSpread(
                 catDetails.latitude,
@@ -228,7 +230,7 @@ export default function CatPageDetails() {
                   image.longitude,
                 ])
               )}
-            />
+            /> */}
             {/* For debugging, uncomment this */}
             {/* {catDetails.images.map((image) => (
               <Marker
@@ -244,3 +246,22 @@ export default function CatPageDetails() {
     </div>
   );
 }
+
+/*
+
+
+<div className="Comment-wrapper">
+            {catDetails.comments.map((comment) => (
+              <div key={comment.id}>
+                <h3 className="user-name">{comment.user.name}</h3>
+                <p className="user-text">{comment.text}</p>
+              </div>
+            ))}
+            {token ? (
+              <CommentForm />
+            ) : (
+              <h3>You need to Login to leave the comment</h3>
+            )}
+          </div>
+
+*/

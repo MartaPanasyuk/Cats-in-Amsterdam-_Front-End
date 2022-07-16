@@ -29,7 +29,6 @@ export default function StarRating(props) {
       color: "#ff3d47",
     },
   });
-
   return (
     <div>
       <Typography component="legend">{props.category}</Typography>

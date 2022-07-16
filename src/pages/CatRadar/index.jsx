@@ -14,6 +14,7 @@ const CatRadar = () => {
   }, [dispatch]);
 
   const cats = useSelector(selectCats);
+
   const markerIcon = new L.icon({
     iconUrl: require("../../images/catFace.png"),
     iconSize: [40, 40],
@@ -42,11 +43,7 @@ const CatRadar = () => {
           />
           {cats.map((cat) => (
             // the marker is every pointer you see on the map
-            <Marker
-              key={cat.name}
-              position={[cat.latitude, cat.longitude]}
-              icon={markerIcon}
-            >
+            <Marker key={cat.name} position={[cat.latitude, cat.longitude]}>
               {/* when we click on the marker, we see the popup */}
               <Popup>
                 <img

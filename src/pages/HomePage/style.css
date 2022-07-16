@@ -1,10 +1,10 @@
 .HomePage_wrapper {
   min-height: 100vh;
-  /* background-color: #f4d58d; */
+  background-color: #fff6ed;
 }
 
 .container {
-  max-width: 980px;
+  max-width: 1010px;
   margin: auto;
 }
 
@@ -18,11 +18,12 @@
   justify-content: center;
   align-items: center;
   text-align: start;
-  height: 330px;
+  height: 500px;
   padding: 20px 0 0 0;
-  border: 2px solid #424242;
+  border-top: 3px solid #ff5b2e;
+  border-bottom: 3px solid #ff5b2e;
   border-radius: 15px;
-  margin: 20px 25px;
+  margin: 60px 20px;
 }
 
 .slick-list {
@@ -38,12 +39,18 @@
   justify-content: center;
 }
 
-.slider .slick-dots button {
+.slick-dots li button {
   font-size: 0;
-  width: 7px;
-  height: 7px;
-  background-color: rgb(95, 95, 95);
-  border-radius: 50%;
+  line-height: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+  color: #ff5b2e;
+  border: 0;
+  outline: none;
+  background: #ff5b2e;
 }
 
 .flex {
@@ -67,14 +74,46 @@
 }
 .card-img {
   display: block;
-  height: 250px;
-  width: 200px;
+  height: 350px;
+  width: 280px;
+  border-radius: 60px;
   padding: 10px 20px;
+}
+
+.card-title {
+  color: #040f73;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card-content {
+  display: flex;
 }
 
 .map-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.heart {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+  color: #e63946;
+}
+
+.page-title {
+  color: #040f73;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.Footer {
+  background-color: #ff5b2e;
+  height: 100px;
 }
 
 /*

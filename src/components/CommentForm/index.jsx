@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postNewComment } from "../../store/cat/thunks";
@@ -27,11 +28,17 @@ export default function CommentForm() {
                 onChange={(e) => setText(e.target.value)}
               />
             </div>
-            <button type="submit">Post</button>
-            <button onClick={() => setShowForm(false)}>Discard</button>
+            <button type="submit" className="Btn">
+              Post
+            </button>
+            <button onClick={() => setShowForm(false)} className="Btn">
+              Discard
+            </button>
           </form>
         ) : (
-          <button onClick={() => setShowForm(true)}>Add a comment</button>
+          <button onClick={() => setShowForm(true)} className="Btn">
+            Add a comment
+          </button>
         )}
       </>
     </div>

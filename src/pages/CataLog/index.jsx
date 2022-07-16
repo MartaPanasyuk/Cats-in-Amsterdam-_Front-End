@@ -41,7 +41,7 @@ export default function CataLog() {
   };
 
   return (
-    <div>
+    <div className="container">
       <button onClick={() => setDisplayAllCats(true)}>All</button>
       <button onClick={() => handleCilck(1)}>Flufiness</button>
       <button onClick={() => handleCilck(2)}>Purring</button>

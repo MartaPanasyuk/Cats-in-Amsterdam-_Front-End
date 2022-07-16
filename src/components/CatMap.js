@@ -9,7 +9,6 @@ import L from "leaflet";
 
 const CatMap = () => {
   const dispatch = useDispatch();
-  const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCat());
@@ -27,13 +26,15 @@ const CatMap = () => {
         style={{
           height: "40vw",
           width: "60vw",
-          maxWidth: "800px",
-          maxHeight: "500px",
+          maxWidth: "1000px",
+          maxHeight: "600px",
           border: "2px solid #424242",
           borderRadius: "15px",
+          marginTop: "10px",
+          marginBottom: "20px",
         }}
-        center={[52.36994, 4.906]}
-        zoom={13}
+        center={[52.3599976, 4.8852188]}
+        zoom={18}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -41,13 +42,11 @@ const CatMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {cats.map((cat) => (
-          // the marker is every pointer you see on the map
           <Marker
             key={cat.name}
             position={[cat.latitude, cat.longitude]}
             icon={markerIcon}
           >
-            {/* when we click on the marker, we see the popup */}
             <Popup>
               <Link to={`/cats/${cat.id}`}>
                 <img
@@ -56,7 +55,7 @@ const CatMap = () => {
                   src={cat.picture}
                 />{" "}
               </Link>
-              <p style={{ margin: "5px", fontSize: "15px" }}>{cat.name}</p>
+              <p style={{ marginTop: "5px", fontSize: "15px" }}>{cat.name}</p>
             </Popup>
           </Marker>
         ))}

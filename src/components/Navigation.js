@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
+import { FaCat } from "react-icons/fa";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export const Navigation = () => {
     <Header>
       <Nav>
         <Logo href="/">
-          Cat<span>Radar</span>
+          <FaCat /> Cat<span>Radar</span>
         </Logo>
         <Hamburger onClick={() => setOpen(!open)}>
           <span />
@@ -41,12 +42,13 @@ export const Navigation = () => {
 };
 
 const Header = styled.div`
-  background: #f5cac3;
+  background: #fff6ed;
 `;
 
 const MenuLink = styled.a`
-  font-size: 18px;
-  color: #424242;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(106, 110, 143);
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 5px;
@@ -59,8 +61,8 @@ const MenuLink = styled.a`
   border-bottom: 2px solid transparent;
 
   &:hover {
-    color: #023047;
-    border-bottom: 3px solid #023047;
+    color: #ff5b2e;
+    border-bottom: 4px solid #ff5b2e;
   }
 `;
 
@@ -69,9 +71,9 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #f5cac3;
+  background: #fff6ed;
   /* position: absolute; */
-  max-width: 980px;
+  max-width: 1000px;
   margin: auto;
   height: 150px;
   left: 0;
@@ -79,7 +81,8 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.a`
-  color: #023047;
+  color: #040f73;
+  font-weight: bold;
   text-decoration: none;
   font-weight: 800;
   font-size: 30px;

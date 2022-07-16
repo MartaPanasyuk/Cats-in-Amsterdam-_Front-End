@@ -1,0 +1,14 @@
+.Btn {
+  width: 100px;
+  height: 22px;
+  display: inline-block;
+  font-size: 12px;
+  color: #191c18;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 28px;
+  text-decoration: none;
+  transition: color 0.7s;
+  background-color: transparent;
+  border: 1px solid #191c18;
+}

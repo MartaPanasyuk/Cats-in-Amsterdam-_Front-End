@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCats } from "../../store/cat/selectors";
@@ -40,7 +41,7 @@ export default function MySpace() {
     getCurrentLocation();
   }, []);
 
-  console.log("myLocation", myLocation);
+  //console.log("myLocation", myLocation);
 
   const filteredCats = cats.filter((cat) => {
     const distance = getDistance(
@@ -61,12 +62,13 @@ export default function MySpace() {
   //const marker = L.marker([L.latLng], { icon: meIcon }).addTo(map);
 
   return (
-    <div>
-      {filteredCats.map((cat) => (
-        <div>
-          <img src={cat.picture} alt={cat.name} />
-        </div>
-      ))}
+    <div className="container">
+      <h2>Cats Near You</h2>
+      <div className="Picture-wrapper">
+        {filteredCats.map((cat) => (
+          <img src={cat.picture} alt={cat.name} className="Picture-container" />
+        ))}
+      </div>
       {myLocation ? (
         <div className="MapContainer">
           <MapContainer
@@ -87,11 +89,7 @@ export default function MySpace() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker
-              key={myLocation}
-              position={[myLocation[0], myLocation[1]]}
-              icon={meIcon}
-            >
+            <Marker key={myLocation} position={[myLocation[0], myLocation[1]]}>
               <Popup>
                 <h3>It's Me!!!</h3>
               </Popup>

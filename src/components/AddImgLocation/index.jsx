@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import { useState, useEffect } from "react";
 import Cloudinary from "../Cloudinary";
 import { useDispatch } from "react-redux";
@@ -45,20 +46,18 @@ export default function AddImgLocation() {
   }, []);
 
   return (
-    <div>
-      <>
-        {showForm ? (
-          <form onSubmit={onFormSubmit}>
-            <Cloudinary image={image} setImage={setImage} />
-            <button>Post a new photo</button>
-            <button onClick={() => setShowForm(false)}>Discard</button>
-          </form>
-        ) : (
-          <button onClick={() => setShowForm(true)}>
-            Have you seen me? <FaPaw />
-          </button>
-        )}
-      </>
+    <div className="Form-wrapper">
+      {showForm ? (
+        <form onSubmit={onFormSubmit}>
+          <Cloudinary image={image} setImage={setImage} />
+          <button>Post a new photo</button>
+          <button onClick={() => setShowForm(false)}>Discard</button>
+        </form>
+      ) : (
+        <button onClick={() => setShowForm(true)} className="btn-wrapper">
+          Have you seen me? <FaPaw />
+        </button>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ const initialState = {
   catlist: [],
   details: null,
   categorylist: [],
+  comments: [],
 };
 
 export const catSlice = createSlice({
@@ -16,12 +17,13 @@ export const catSlice = createSlice({
     },
     catDetailsFatched: (state, action) => {
       state.details = action.payload;
+      state.comments = action.payload.comments;
     },
     catImageFetched: (state, action) => {
       state.details.images = [...state.details.images, action.payload];
     },
     catCommentFetched: (state, action) => {
-      state.details.comments = [...state.details.comments, action.payload];
+      state.comments = [...state.comments, action.payload];
     },
     fetchCategories: (state, action) => {
       state.categorylist = action.payload;

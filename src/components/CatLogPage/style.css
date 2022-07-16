@@ -1,0 +1,16 @@
+.Page-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.image-box {
+  width: 200px;
+  height: 250px;
+}
+
+.image {
+  margin-right: 20px;
+  border-radius: 10px;
+}

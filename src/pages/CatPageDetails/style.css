@@ -12,6 +12,17 @@
   border-radius: 10px;
 }
 
+.card-header {
+  display: flex;
+}
+
+.page-title {
+  margin-top: 10px;
+  color: #ff5b2e;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
 .btn-container {
   display: flex;
   flex-direction: row;
@@ -19,30 +30,34 @@
 }
 
 .btn {
-  margin-right: 20px;
-  width: 45px;
-  height: 25px;
-  /* padding: 18px 34px; */
+  margin: 10px;
   display: inline-block;
-  font-size: 10px;
-  color: #f5cac3;
+  border: none;
   text-transform: uppercase;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 10px;
-  text-decoration: none;
-  text-align: center;
+
+  padding: 18px 34px;
+  border-radius: 28px;
+
   transition: color 0.7s;
-  background-color: #424242;
+  background-color: #ff5b2e;
 }
 
+.btn-text {
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 12px;
+}
 .btn:hover {
   background-color: #023047;
 }
 
 .hearts {
-  font-size: 16px;
+  margin-left: 5px;
+  font-size: 20px;
   padding-top: 5px;
+  color: #e63946;
 }
 
 .Rating-wrapper {
@@ -53,8 +68,29 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  color: #424242;
+  color: #040f73;
 }
 .Rating-header {
   margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.Box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form-wrapper {
+  margin-top: 15px;
+}
+
+.Comment-wrapper {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 }

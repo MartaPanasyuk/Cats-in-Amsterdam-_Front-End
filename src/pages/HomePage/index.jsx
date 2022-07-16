@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BsFillHeartFill } from "react-icons/bs";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -56,21 +57,26 @@ const HomePage = () => {
   return (
     <div className="HomePage_wrapper">
       <div className="container">
-        <h2>Cats on the Street</h2>
         {!cats ? (
           <p>Loading</p>
         ) : (
           <div className="image-slider">
             <Slider {...settings}>
               {cats.map((cat) => (
-                <div class="flex">
-                  <div class="flex__column">
-                    <div class="speakers-slider__item">
-                      <img src={cat.picture} className="card-img" alt="cats" />
+                <div className="flex">
+                  <div className="flex__column">
+                    <div className="speakers-slider__item">
                       <Link to={`/cats/${cat.id}`}>
-                        <span>{cat.name}</span>
+                        <img
+                          src={cat.picture}
+                          className="card-img"
+                          alt="cats"
+                        />
                       </Link>
-                      <strong>
+                      <div className="card-content">
+                        <h3 className="card-title">{cat.name}</h3>
+                      </div>
+                      <strong className="heart">
                         {cat.like} <BsFillHeartFill />
                       </strong>
                     </div>
@@ -80,14 +86,20 @@ const HomePage = () => {
             </Slider>
           </div>
         )}
-        <div>
+        <div className="page-title">
           <h2>Hey, Look wo is here !</h2>
         </div>
         <div className="map-wrapper">
           <CatMap />
         </div>
       </div>
+      <div className="Footer">This is footer</div>
     </div>
   );
 };
 export { HomePage };
+
+/*
+
+
+*/
