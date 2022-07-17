@@ -1,8 +1,10 @@
 import React from "react";
+import "./style.css";
 import { useState, useEffect } from "react";
 import Cloudinary from "../Cloudinary";
 import { postNewCat } from "../../store/cat/thunks";
 import { useDispatch } from "react-redux";
+import { FaPaw } from "react-icons/fa";
 
 export default function AddCatForm() {
   const dispatch = useDispatch();
@@ -44,30 +46,42 @@ export default function AddCatForm() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <p>Post a new Cat</p>
+    <div className="container">
+      <div className="Add-form">
+        <div className="Add-form-header">
+          <h1 className="Add-form-text">Post a new Cat</h1>
+          <p className="Add-form-subtext">
+            If you want to add a new cat and share it with another user, please
+            fill the form
+          </p>
+        </div>
+        <form onSubmit={onFormSubmit} className="Form-container">
+          <div>
+            <input
+              type="text"
+              value={name}
+              placeholder="Cats Name*"
+              onChange={(e) => setName(e.target.value)}
+              className="Input-form"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              value={description}
+              placeholder="Please add small description here*"
+              onChange={(e) => setDescription(e.target.value)}
+              className="Input-form"
+            />
+          </div>
+          <Cloudinary image={image} setImage={setImage} />
+          <button type="submit" className="btn-wrapper">
+            <h4 className="button">
+              Post a New Cat <FaPaw />
+            </h4>
+          </button>
+        </form>
       </div>
-      <form onSubmit={onFormSubmit}>
-        <div>
-          <label>Name </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Description</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <Cloudinary image={image} setImage={setImage} />
-        <button type="submit">Post a New Cat</button>
-      </form>
     </div>
   );
 }

@@ -1,14 +1,29 @@
-.Picture-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 200px;
-  height: 250px;
+.section-header {
+  margin-top: 55px;
+  margin-bottom: 50px;
+  color: #ff5b2e;
+  font-size: 40px;
+  text-transform: uppercase;
 }
 
-.Picture-container {
-  margin-right: 20px;
+.Image-sector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
   border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.lable {
+  font-size: 14px;
+  color: #040f73;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.Map-header {
+  color: #040f73;
 }

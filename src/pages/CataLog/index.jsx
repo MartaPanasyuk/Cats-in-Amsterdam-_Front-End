@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { oneCategory } from "../../store/category/thunks";
@@ -42,10 +43,20 @@ export default function CataLog() {
 
   return (
     <div className="container">
-      <button onClick={() => setDisplayAllCats(true)}>All</button>
-      <button onClick={() => handleCilck(1)}>Flufiness</button>
-      <button onClick={() => handleCilck(2)}>Purring</button>
-      <button onClick={() => handleCilck(3)}>Friendliness</button>
+      <div className="Button-section">
+        <button onClick={() => setDisplayAllCats(true)} className="Catalog-btn">
+          <h2 className="button-text">All</h2>
+        </button>
+        <button onClick={() => handleCilck(1)} className="Catalog-btn">
+          <h2 className="button-text">Flufiness</h2>
+        </button>
+        <button onClick={() => handleCilck(2)} className="Catalog-btn">
+          <h2 className="button-text">Purring</h2>
+        </button>
+        <button onClick={() => handleCilck(3)} className="Catalog-btn">
+          <h2 className="button-text">Friendliness</h2>
+        </button>
+      </div>
       <div>
         {displayAllCats ? (
           <CatLogPage cats={selectAllCats} />

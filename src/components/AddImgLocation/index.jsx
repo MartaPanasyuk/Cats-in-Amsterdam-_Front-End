@@ -46,16 +46,22 @@ export default function AddImgLocation() {
   }, []);
 
   return (
-    <div className="Form-wrapper">
+    <div>
       {showForm ? (
         <form onSubmit={onFormSubmit}>
           <Cloudinary image={image} setImage={setImage} />
-          <button>Post a new photo</button>
-          <button onClick={() => setShowForm(false)}>Discard</button>
+          <button className="btn-wrapper">
+            <h4 className="button-title">Post a new photo</h4>
+          </button>
+          <button onClick={() => setShowForm(false)} className="btn-wrapper">
+            <h4 className="button-title">Discard</h4>
+          </button>
         </form>
       ) : (
         <button onClick={() => setShowForm(true)} className="btn-wrapper">
-          Have you seen me? <FaPaw />
+          <h3 className="button-title">
+            Have you seen me? <FaPaw />
+          </h3>
         </button>
       )}
     </div>

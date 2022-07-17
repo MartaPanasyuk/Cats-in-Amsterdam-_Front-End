@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
 import { FaCat } from "react-icons/fa";
+import { TbHeartHandshake } from "react-icons/tb";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -24,17 +25,18 @@ export const Navigation = () => {
           <span />
         </Hamburger>
         <Menu open={open}>
+          <MenuLink href="/CataLog">CATALog</MenuLink>
+          <MenuLink href="/addCat">Add a New Cat</MenuLink>
           {token ? (
             <>
-              <MenuLink href="/cats/me">My Space</MenuLink>
+              <MenuLink href="/cats/me">
+                Cat Near Me <TbHeartHandshake />
+              </MenuLink>
               <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
             </>
           ) : (
             <MenuLink href="/login">Login</MenuLink>
           )}
-          <MenuLink href="/catRadar">CatRadar</MenuLink>
-          <MenuLink href="/CataLog">CataLog</MenuLink>
-          <MenuLink href="/addCat">Add a New Cat</MenuLink>
         </Menu>
       </Nav>
     </Header>

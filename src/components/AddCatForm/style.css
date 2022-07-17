@@ -1,0 +1,70 @@
+.Add-form {
+  margin-top: 80px;
+  border-radius: 50px;
+  border-top: 3px solid #2d3579;
+}
+
+.Add-form-header {
+  margin-top: 80px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Add-form-text {
+  color: #2d3579;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.Add-form-subtext {
+  color: #424875;
+  font-size: 20px;
+}
+
+.Form-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  border: 0;
+  border-radius: 10px;
+  min-height: 600px;
+  min-width: 150px;
+  box-shadow: 0 6px 12px 0 rgb(62 65 75 / 10%);
+}
+
+.btn-wrapper {
+  margin: 10px;
+  display: inline-block;
+  border: none;
+  text-transform: uppercase;
+  padding: 18px 34px;
+  border-radius: 28px;
+  transition: color 0.7s;
+  background-color: #ff5b2e;
+}
+.btn-wrapper:hover {
+  background-color: #2d3579;
+}
+
+.button {
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 12px;
+}
+
+.Input-form {
+  min-width: 550px;
+  min-height: 50px;
+  font-size: 20px;
+  border-radius: 21px;
+  padding: 1px 24px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}

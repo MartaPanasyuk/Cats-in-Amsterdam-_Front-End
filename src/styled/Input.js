@@ -1,13 +1,15 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Input = styled.input`
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-
-  ::placeholder {
-    color: #1E3163;
-  }
+  display: flex;
+  width: 550px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 21px;
+  padding: 1px 24px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  margin-left: 25%;
+  background-color: white;
 `;

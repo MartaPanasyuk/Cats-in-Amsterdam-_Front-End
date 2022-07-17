@@ -9,6 +9,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
 import PlotRoute from "../PlotRoute";
 import L from "leaflet";
+import { IoIosHeart } from "react-icons/io";
 
 export default function MySpace() {
   const dispatch = useDispatch();
@@ -59,27 +60,46 @@ export default function MySpace() {
     iconSize: [40, 40],
   });
 
-  //const marker = L.marker([L.latLng], { icon: meIcon }).addTo(map);
+  const catIcon = L.icon({
+    iconUrl: require("../../images/pin.png"),
+    iconSize: [40, 40],
+  });
 
   return (
     <div className="container">
-      <h2>Cats Near You</h2>
-      <div className="Picture-wrapper">
+      <h2 className="section-header">Cats Near You</h2>
+      <div className="Image-sector">
         {filteredCats.map((cat) => (
-          <img src={cat.picture} alt={cat.name} className="Picture-container" />
+          <div className="Image-card-wrapper ">
+            <img src={cat.picture} alt={cat.name} className="Image-card" />
+            <Link to={`/cats/${cat.id}`} className="dex">
+              {" "}
+              <h4>
+                {cat.name} <IoIosHeart />
+              </h4>
+            </Link>
+          </div>
         ))}
       </div>
+      <p class="lable">―MAP―</p>
       {myLocation ? (
         <div className="MapContainer">
+          <div className="Map-header">
+            <h2>Find you way here</h2>
+          </div>
           <MapContainer
             style={{
               height: "40vw",
               width: "60vw",
-              maxWidth: "800px",
-              maxHeight: "500px",
+              maxWidth: "1000px",
+              maxHeight: "600px",
+              borderRadius: "15px",
+              marginTop: "10px",
+              marginBottom: "20px",
+              border: "8px solid #ff5b2e",
             }}
             center={[52.36994, 4.906]}
-            zoom={13}
+            zoom={25}
             scrollWheelZoom={true}
           >
             {filteredCats.map((cat) => (
@@ -89,13 +109,21 @@ export default function MySpace() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker key={myLocation} position={[myLocation[0], myLocation[1]]}>
+            <Marker
+              key={myLocation}
+              position={[myLocation[0], myLocation[1]]}
+              icon={meIcon}
+            >
               <Popup>
-                <h3>It's Me!!!</h3>
+                <h3>You are Here!!!</h3>
               </Popup>
             </Marker>
             {filteredCats.map((cat) => (
-              <Marker key={cat.name} position={[cat.latitude, cat.longitude]}>
+              <Marker
+                key={cat.name}
+                position={[cat.latitude, cat.longitude]}
+                icon={catIcon}
+              >
                 <Popup>
                   <Link to={`/cats/${cat.id}`}>
                     <img
@@ -111,13 +139,8 @@ export default function MySpace() {
           </MapContainer>
         </div>
       ) : (
-        <div>dnkjfb</div>
+        <div>Loading</div>
       )}
     </div>
   );
 }
-
-/*
-
-CataLog
-*/

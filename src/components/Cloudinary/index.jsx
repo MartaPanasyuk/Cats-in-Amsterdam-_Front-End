@@ -23,7 +23,7 @@ export default function Cloudinary(props) {
   return (
     <div style={{ textAlign: "center" }}>
       <input type="file" onChange={uploadImage} />
-      <div>
+      <div className="Cloundinary-wrapper">
         <img
           className="Image"
           src={

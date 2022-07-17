@@ -4,12 +4,8 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  fetchCatWithInfo,
-  updayteCatLike,
-  allCategories,
-} from "../../store/cat/thunks";
-import { selectCatDetails, selectCategories } from "../../store/cat/selectors";
+import { fetchCatWithInfo, updayteCatLike } from "../../store/cat/thunks";
+import { selectCatDetails } from "../../store/cat/selectors";
 import { selectToken } from "../../store/user/selectors";
 import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import PlotRoute from "../PlotRoute";
@@ -28,8 +24,6 @@ export default function CatPageDetails() {
 
   const token = useSelector(selectToken);
   const catDetails = useSelector(selectCatDetails);
-  // const categories = useSelector(selectCategories);
-  //console.log(categories);
 
   const URL = `https://api.geoapify.com/v1/geocode/reverse`;
 
@@ -80,7 +74,6 @@ export default function CatPageDetails() {
   }, []);
 
   useEffect(() => {
-    dispatch(allCategories());
     dispatch(fetchCatWithInfo(id));
   }, [dispatch, id]);
 
@@ -111,116 +104,127 @@ export default function CatPageDetails() {
   });
 
   return (
-    <div className="Details-page container">
-      <div key={catDetails.id} className="card-wrapper">
-        <div className="card-header">
-          <h2 className="page-title">{catDetails.name}</h2>
-          <p className="hearts">
-            <BsFillHeartFill />
-            {catDetails.like}
-          </p>{" "}
-        </div>
-        <div className="Image-wrapper">
-          <img
-            src={catDetails.picture}
-            alt={catDetails.title}
-            className="Image-container"
-          />
-          {catDetails.images.map((c) => (
+    <div className="Details-page">
+      <div className="container">
+        <div key={catDetails.id} className="card-wrapper">
+          <div className="card-header">
+            <h2 className="page-title">{catDetails.name}</h2>
+            <p className="hearts">
+              <BsFillHeartFill />
+              {catDetails.like}
+            </p>{" "}
+          </div>
+          <div className="Image-sector">
             <img
-              src={c.url}
-              alt={c.title}
-              key={c.id}
-              className="Image-container"
+              src={catDetails.picture}
+              alt={catDetails.title}
+              className="Image-card"
             />
-          ))}
-        </div>
-        <div className="btn-container">
-          <button
-            onClick={() => dispatch(updayteCatLike(catDetails.id))}
-            className="btn"
-          >
-            <h2 className="btn-text">Like</h2>
-          </button>
-        </div>
-        <div className="Box">
-          <div className="Rating-wrapper">
-            <h3 className="Rating-header">Rate This Cat</h3>
-            <StarRating
-              category={"Ffluffiness"}
-              categoryId={1}
-              catId={catDetails.id}
-            />
-            <StarRating
-              category={"Purring"}
-              categoryId={2}
-              catId={catDetails.id}
-            />
-            <StarRating
-              category={"Friendliness"}
-              categoryId={3}
-              catId={catDetails.id}
-            />
+            {catDetails.images.map((c) => (
+              <img
+                src={c.url}
+                alt={c.title}
+                key={c.id}
+                className="Image-card"
+              />
+            ))}
           </div>
+          <div className="btn-container">
+            <button
+              onClick={() => dispatch(updayteCatLike(catDetails.id))}
+              className="btn"
+            >
+              <h2 className="btn-text">Like</h2>
+            </button>
+          </div>
+          <div className="Box">
+            <div className="Rating-wrapper">
+              <h3 className="Rating-header">Rate This Cat</h3>
+              <StarRating
+                category={"Ffluffiness"}
+                categoryId={1}
+                catId={catDetails.id}
+              />
+              <StarRating
+                category={"Purring"}
+                categoryId={2}
+                catId={catDetails.id}
+              />
+              <StarRating
+                category={"Friendliness"}
+                categoryId={3}
+                catId={catDetails.id}
+              />
+            </div>
 
-          <div className="Form-wrapper">
-            {token ? (
-              <AddImgLocation />
-            ) : (
-              <div className="box-text">
-                <h3 className="title">
-                  Have you seen Me? <FaPaw />
-                </h3>
-                <p className="subtitle">You need to Login to post my picture</p>
-              </div>
-            )}
+            <div className="Form-wrapper">
+              {token ? (
+                <AddImgLocation />
+              ) : (
+                <div className="box-text">
+                  <h3 className="title">
+                    Have you seen Me? <FaPaw />
+                  </h3>
+                  <p className="subtitle">
+                    You need to Login to post my picture
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        {address ? (
-          <MapContainer
-            style={{
-              height: "40vw",
-              width: "60vw",
-              maxWidth: "800px",
-              maxHeight: "500px",
-            }}
-            center={[52.36994, 4.906]}
-            zoom={25}
-            scrollWheelZoom={true}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <PlotRoute
-              points={[myLocation, [catDetails.latitude, catDetails.longitude]]}
-            />
-            <Marker
-              key={myLocation}
-              position={[myLocation[0], myLocation[1]]}
-              icon={meIcon}
+        <p class="lable">―MAP―</p>
+        <div className="Map-box">
+          {address ? (
+            <MapContainer
+              style={{
+                height: "40vw",
+                width: "60vw",
+                maxWidth: "1000px",
+                maxHeight: "600px",
+                borderRadius: "15px",
+                marginTop: "10px",
+                marginBottom: "20px",
+                border: "8px solid #ff5b2e",
+              }}
+              center={[52.36994, 4.906]}
+              zoom={25}
+              scrollWheelZoom={true}
             >
-              <Popup>
-                <h3>You are here!</h3>
-              </Popup>
-            </Marker>
-            <Marker
-              key={catDetails.name}
-              position={[catDetails.latitude, catDetails.longitude]}
-              icon={catIcon}
-            >
-              <Popup>
-                <img
-                  alt={catDetails.name}
-                  style={{ width: "125px", borderRadius: "0.5em" }}
-                  src={catDetails.picture}
-                />
-                <p>{catDetails.name}</p>
-              </Popup>
-            </Marker>
-            {/* <Circle
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <PlotRoute
+                points={[
+                  myLocation,
+                  [catDetails.latitude, catDetails.longitude],
+                ]}
+              />
+              <Marker
+                key={myLocation}
+                position={[myLocation[0], myLocation[1]]}
+                icon={meIcon}
+              >
+                <Popup>
+                  <h3>You are here!</h3>
+                </Popup>
+              </Marker>
+              <Marker
+                key={catDetails.name}
+                position={[catDetails.latitude, catDetails.longitude]}
+                icon={catIcon}
+              >
+                <Popup>
+                  <img
+                    alt={catDetails.name}
+                    style={{ width: "125px", borderRadius: "0.5em" }}
+                    src={catDetails.picture}
+                  />
+                  <p>{catDetails.name}</p>
+                </Popup>
+              </Marker>
+              {/* <Circle
               center={[catDetails.latitude, catDetails.longitude]}
               radius={calculateSpread(
                 catDetails.latitude,
@@ -231,18 +235,20 @@ export default function CatPageDetails() {
                 ])
               )}
             /> */}
-            {/* For debugging, uncomment this */}
-            {/* {catDetails.images.map((image) => (
+              {/* For debugging, uncomment this */}
+              {/* {catDetails.images.map((image) => (
               <Marker
                 opacity={0.5}
                 position={[image.latitude, image.longitude]}
               />
             ))} */}
-          </MapContainer>
-        ) : (
-          ""
-        )}
+            </MapContainer>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
+      <div className="Footer"></div>
     </div>
   );
 }

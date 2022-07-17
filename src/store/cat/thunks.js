@@ -14,7 +14,7 @@ const API_URL = `http://localhost:4000`;
 export const fetchCat = () => async (dispatch, getState) => {
   try {
     const response = await axios.get(`${API_URL}/cats`);
-    console.log("response of cats", response.data);
+    //console.log("response of cats", response.data);
     const res = response.data;
     dispatch(catFetched(res));
   } catch (e) {
@@ -60,7 +60,7 @@ export const postNewComment = (text) => async (dispatch, getState) => {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("response", response.data);
+    //console.log("response", response.data);
     dispatch(catCommentFetched(response.data));
     showMessageWithTimeout("success", false, "You Comment is Posted!", 2000);
   } catch (e) {
@@ -115,18 +115,6 @@ export const updateCat = (image, myLocation) => async (dispatch, getState) => {
     // console.log("response", response);
     dispatch(showMessageWithTimeout("success", true, "You Image Is Posted!"));
     dispatch(catImageFetched(response.data));
-  } catch (e) {
-    console.log(e.message);
-  }
-};
-
-//Get All Categories
-export const allCategories = () => async (dispatch, getState) => {
-  try {
-    const response = await axios.get(`${API_URL}/rating`);
-    const res = response.data;
-    //console.log("response", res);
-    dispatch(fetchCategories(res));
   } catch (e) {
     console.log(e.message);
   }

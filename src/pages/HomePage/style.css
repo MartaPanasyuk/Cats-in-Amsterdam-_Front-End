@@ -116,6 +116,10 @@
   height: 100px;
 }
 
+.Login-wrapper {
+  height: 100vh;
+}
+
 /*
 
 .slider__item img {

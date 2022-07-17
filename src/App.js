@@ -24,7 +24,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cats/:id" element={<CatPageDetails />} />
-        <Route path="/catRadar" element={<CatRadar />} />
         <Route path="/CataLog" element={<CataLog />} />
         <Route path="/addCat" element={<AddCatForm />} />
         <Route path="/cats/me" element={<MySpace />} />
