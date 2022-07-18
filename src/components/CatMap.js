@@ -28,13 +28,13 @@ const CatMap = () => {
           width: "60vw",
           maxWidth: "1000px",
           maxHeight: "600px",
-          border: "2px solid #424242",
           borderRadius: "15px",
           marginTop: "10px",
           marginBottom: "20px",
+          border: "5px solid #ff5b2e",
         }}
         center={[52.3599976, 4.8852188]}
-        zoom={18}
+        zoom={15}
         scrollWheelZoom={true}
       >
         <TileLayer

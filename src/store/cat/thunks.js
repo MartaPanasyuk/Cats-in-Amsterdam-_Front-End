@@ -1,14 +1,8 @@
 import axios from "axios";
-import {
-  catFetched,
-  catDetailsFatched,
-  catImageFetched,
-  catCommentFetched,
-  fetchCategories,
-} from "../cat/slice";
+import { catFetched, catDetailsFatched, catImageFetched } from "../cat/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 
-const API_URL = `http://localhost:4000`;
+const API_URL = `https://cat-radar.herokuapp.com`;
 
 // Get All Cats
 export const fetchCat = () => async (dispatch, getState) => {
@@ -40,29 +34,6 @@ export const updayteCatLike = (catId) => async (dispatch, getState) => {
     const response = await axios.put(`${API_URL}/cats/${catId}`);
     //console.log("response", response.data);
     dispatch(catDetailsFatched(response.data));
-  } catch (e) {
-    console.log(e.message);
-  }
-};
-
-//Create a new Comment
-export const postNewComment = (text) => async (dispatch, getState) => {
-  try {
-    const token = getState().user.token;
-    const userId = getState().user.profile.id;
-    const catId = getState().cat.details.id;
-    const response = await axios.post(
-      `${API_URL}/cats/comment/${catId}`,
-      {
-        text: text,
-        userId: userId,
-        catId: catId,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    //console.log("response", response.data);
-    dispatch(catCommentFetched(response.data));
-    showMessageWithTimeout("success", false, "You Comment is Posted!", 2000);
   } catch (e) {
     console.log(e.message);
   }
@@ -125,15 +96,11 @@ export const rateCat =
   (newValue, categoryId, catId) => async (dispatch, getState) => {
     try {
       // const token = getState().user.token;
-      const response = await axios.post(
-        `${API_URL}/rating`,
-        {
-          stars: newValue,
-          categoryId,
-          catId,
-        }
-        //{ headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await axios.post(`${API_URL}/rating`, {
+        stars: newValue,
+        categoryId,
+        catId,
+      });
       //console.log("response", response);
     } catch (e) {
       console.log(e.message);

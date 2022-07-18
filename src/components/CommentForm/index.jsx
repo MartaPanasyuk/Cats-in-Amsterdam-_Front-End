@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postNewComment } from "../../store/cat/thunks";
+import { postNewComment } from "../../store/category/thunks";
 
 export default function CommentForm() {
   const dispatch = useDispatch();
@@ -17,30 +17,31 @@ export default function CommentForm() {
 
   return (
     <div>
-      <>
+      <div className="wrapper">
         {showForm ? (
           <form onSubmit={onFormSubmit}>
             <div>
-              <label>Text</label>
               <input
                 type="text"
                 value={text}
+                className="comment-input"
+                placeholder="Place for your comment*"
                 onChange={(e) => setText(e.target.value)}
               />
             </div>
-            <button type="submit" className="Btn">
-              Post
+            <button type="submit" className="btn-wrapper">
+              <h2 className="button-title"> Post</h2>
             </button>
-            <button onClick={() => setShowForm(false)} className="Btn">
-              Discard
+            <button onClick={() => setShowForm(false)} className="btn-wrapper">
+              <h2 className="button-title">Discard</h2>
             </button>
           </form>
         ) : (
-          <button onClick={() => setShowForm(true)} className="Btn">
-            Add a comment
+          <button onClick={() => setShowForm(true)} className="btn-wrapper">
+            <h3 className="button-title"> Add a comment</h3>
           </button>
         )}
-      </>
+      </div>
     </div>
   );
 }

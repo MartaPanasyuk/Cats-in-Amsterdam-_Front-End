@@ -1,7 +1,7 @@
 .Button-section {
   display: flex;
   justify-content: flex-start;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 30px;
 }
 
@@ -10,7 +10,7 @@
   display: inline-block;
   border: none;
   text-transform: uppercase;
-  padding: 18px 50px;
+  padding: 18px 45px;
   border-radius: 30px;
   transition: color 0.7s;
   background-color: transparent;

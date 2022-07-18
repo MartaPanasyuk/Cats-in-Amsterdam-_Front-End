@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   catlist: [],
   details: null,
-  categorylist: [],
-  comments: [],
 };
 
 export const catSlice = createSlice({
@@ -22,22 +20,11 @@ export const catSlice = createSlice({
     catImageFetched: (state, action) => {
       state.details.images = [...state.details.images, action.payload];
     },
-    catCommentFetched: (state, action) => {
-      state.comments = [...state.comments, action.payload];
-    },
-    fetchCategories: (state, action) => {
-      state.categorylist = action.payload;
-    },
   },
 });
 
-export const {
-  catFetched,
-  catDetailsFatched,
-  catImageFetched,
-  catCommentFetched,
-  fetchCategories,
-} = catSlice.actions;
+export const { catFetched, catDetailsFatched, catImageFetched } =
+  catSlice.actions;
 
 export default catSlice.reducer;
 

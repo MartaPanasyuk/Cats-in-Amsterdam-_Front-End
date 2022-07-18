@@ -46,47 +46,52 @@ export default function AddCatForm() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="Add-form">
-        <div className="Add-form-header">
-          <h1 className="Add-form-text">Post a new Cat</h1>
-          <p className="Add-form-subtext">
-            If you want to add a new cat and share it with another user, please
-            fill the form
-          </p>
+    <div>
+      <div className="container">
+        <div className="Add-form">
+          <div className="Add-form-header">
+            <h1 className="Add-form-text">Post a new Cat</h1>
+            <p className="Add-form-subtext">
+              If you want to add a new cat and share it with another user,
+              please fill the form
+            </p>
+          </div>
+          <form onSubmit={onFormSubmit} className="Form-container">
+            <div>
+              <input
+                type="text"
+                value={name}
+                placeholder="Cats Name*"
+                onChange={(e) => setName(e.target.value)}
+                className="Input-form"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={description}
+                placeholder="Please add small description here*"
+                onChange={(e) => setDescription(e.target.value)}
+                className="Input-form"
+              />
+            </div>
+            <Cloudinary image={image} setImage={setImage} />
+            <button type="submit" className="btn-wrapper">
+              <h4 className="button">
+                Post a New Cat <FaPaw />
+              </h4>
+            </button>
+          </form>
         </div>
-        <form onSubmit={onFormSubmit} className="Form-container">
-          <div>
-            <input
-              type="text"
-              value={name}
-              placeholder="Cats Name*"
-              onChange={(e) => setName(e.target.value)}
-              className="Input-form"
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              value={description}
-              placeholder="Please add small description here*"
-              onChange={(e) => setDescription(e.target.value)}
-              className="Input-form"
-            />
-          </div>
-          <Cloudinary image={image} setImage={setImage} />
-          <button type="submit" className="btn-wrapper">
-            <h4 className="button">
-              Post a New Cat <FaPaw />
-            </h4>
-          </button>
-        </form>
+      </div>
+      <div className="Footer">
+        <h2 className="Footer-header">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/MartaPanasyuk" className="Footer-link">
+            Marta
+          </a>
+        </h2>
       </div>
     </div>
   );
 }
-
-/*
-
-
-*/

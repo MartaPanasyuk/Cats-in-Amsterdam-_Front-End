@@ -50,7 +50,7 @@ const Header = styled.div`
 const MenuLink = styled.a`
   font-size: 20px;
   font-weight: bold;
-  color: rgb(106, 110, 143);
+  color: #424875;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 5px;

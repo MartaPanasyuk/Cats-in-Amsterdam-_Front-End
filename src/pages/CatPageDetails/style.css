@@ -19,9 +19,9 @@
 
 .page-title {
   margin-top: 10px;
+  margin-bottom: 30px;
   color: #ff5b2e;
   font-size: 40px;
-  text-transform: uppercase;
 }
 
 .btn-container {
@@ -109,4 +109,28 @@
 
 .Map-box {
   margin-top: 20px;
+}
+
+.Comment-header {
+  color: #040f73;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.CommentUser-name {
+  color: #424875;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.CommentUser-text {
+  color: #424875;
+  font-size: 18px;
+}
+
+.Comment-message {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ff5b2e;
 }

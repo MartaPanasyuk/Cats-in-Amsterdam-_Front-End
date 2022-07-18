@@ -57,6 +57,16 @@ const HomePage = () => {
   return (
     <div className="HomePage_wrapper">
       <div className="container">
+        <div className="CatMap-page-title">
+          <h2 className="CatMap-text">Cat Map</h2>
+          <p className="CatMap-subtext">
+            Find the most amazing cats hangign around you
+          </p>
+        </div>
+        <div className="map-wrapper">
+          <CatMap />
+        </div>
+
         {!cats ? (
           <p>Loading</p>
         ) : (
@@ -86,14 +96,15 @@ const HomePage = () => {
             </Slider>
           </div>
         )}
-        <div className="page-title">
-          <h2>Hey, Look wo is here !</h2>
-        </div>
-        <div className="map-wrapper">
-          <CatMap />
-        </div>
       </div>
-      <div className="Footer">This is footer</div>
+      <div className="Footer">
+        <h2 className="Footer-header">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/MartaPanasyuk" className="Footer-link">
+            Marta
+          </a>
+        </h2>
+      </div>
     </div>
   );
 };

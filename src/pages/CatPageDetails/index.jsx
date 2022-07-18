@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCatWithInfo, updayteCatLike } from "../../store/cat/thunks";
+import { fetchCommentWithUser } from "../../store/category/thunks";
 import { selectCatDetails } from "../../store/cat/selectors";
 import { selectToken } from "../../store/user/selectors";
+import { selectCommentBasedOnCat } from "../../store/category/selectors";
 import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import PlotRoute from "../PlotRoute";
 import CommentForm from "../../components/CommentForm";
@@ -14,7 +16,8 @@ import StarRating from "../../components/StarRating";
 import AddImgLocation from "../../components/AddImgLocation";
 import { BsFillHeartFill } from "react-icons/bs";
 import { LatLng, latLng, Point } from "leaflet";
-import { FaPaw } from "react-icons/fa";
+import { FaPaw, FaRegComment } from "react-icons/fa";
+import { AiOutlineLogin } from "react-icons/ai";
 import L from "leaflet";
 
 export default function CatPageDetails() {
@@ -24,6 +27,8 @@ export default function CatPageDetails() {
 
   const token = useSelector(selectToken);
   const catDetails = useSelector(selectCatDetails);
+  const catComments = useSelector(selectCommentBasedOnCat);
+  console.log("comments", catComments);
 
   const URL = `https://api.geoapify.com/v1/geocode/reverse`;
 
@@ -75,6 +80,10 @@ export default function CatPageDetails() {
 
   useEffect(() => {
     dispatch(fetchCatWithInfo(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    dispatch(fetchCommentWithUser(id));
   }, [dispatch, id]);
 
   if (!catDetails)
@@ -137,6 +146,80 @@ export default function CatPageDetails() {
               <h2 className="btn-text">Like</h2>
             </button>
           </div>
+          <p className="lable">―MAP―</p>
+          <div className="Map-box">
+            {address ? (
+              <MapContainer
+                style={{
+                  height: "40vw",
+                  width: "60vw",
+                  maxWidth: "1000px",
+                  maxHeight: "600px",
+                  borderRadius: "15px",
+                  marginTop: "10px",
+                  marginBottom: "20px",
+                  border: "8px solid #ff5b2e",
+                }}
+                center={[52.36994, 4.906]}
+                zoom={25}
+                scrollWheelZoom={true}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <PlotRoute
+                  points={[
+                    myLocation,
+                    [catDetails.latitude, catDetails.longitude],
+                  ]}
+                />
+                <Marker
+                  key={myLocation}
+                  position={[myLocation[0], myLocation[1]]}
+                  icon={meIcon}
+                >
+                  <Popup>
+                    <h3>You are here!</h3>
+                  </Popup>
+                </Marker>
+                <Marker
+                  key={catDetails.name}
+                  position={[catDetails.latitude, catDetails.longitude]}
+                  icon={catIcon}
+                >
+                  <Popup>
+                    <img
+                      alt={catDetails.name}
+                      style={{ width: "125px", borderRadius: "0.5em" }}
+                      src={catDetails.picture}
+                    />
+                    <p>{catDetails.name}</p>
+                  </Popup>
+                </Marker>
+                <Circle
+                  center={[catDetails.latitude, catDetails.longitude]}
+                  radius={calculateSpread(
+                    catDetails.latitude,
+                    catDetails.longitude,
+                    catDetails.images.map((image) => [
+                      image.latitude,
+                      image.longitude,
+                    ])
+                  )}
+                />
+                {/* For debugging, uncomment this */}
+                {/* {catDetails.images.map((image) => (
+              <Marker
+                opacity={0.5}
+                position={[image.latitude, image.longitude]}
+              />
+            ))} */}
+              </MapContainer>
+            ) : (
+              ""
+            )}
+          </div>
           <div className="Box">
             <div className="Rating-wrapper">
               <h3 className="Rating-header">Rate This Cat</h3>
@@ -156,7 +239,6 @@ export default function CatPageDetails() {
                 catId={catDetails.id}
               />
             </div>
-
             <div className="Form-wrapper">
               {token ? (
                 <AddImgLocation />
@@ -166,108 +248,40 @@ export default function CatPageDetails() {
                     Have you seen Me? <FaPaw />
                   </h3>
                   <p className="subtitle">
-                    You need to Login to post my picture
+                    I don't mind you uploading my photo right here
                   </p>
                 </div>
               )}
             </div>
           </div>
         </div>
-        <p class="lable">―MAP―</p>
-        <div className="Map-box">
-          {address ? (
-            <MapContainer
-              style={{
-                height: "40vw",
-                width: "60vw",
-                maxWidth: "1000px",
-                maxHeight: "600px",
-                borderRadius: "15px",
-                marginTop: "10px",
-                marginBottom: "20px",
-                border: "8px solid #ff5b2e",
-              }}
-              center={[52.36994, 4.906]}
-              zoom={25}
-              scrollWheelZoom={true}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <PlotRoute
-                points={[
-                  myLocation,
-                  [catDetails.latitude, catDetails.longitude],
-                ]}
-              />
-              <Marker
-                key={myLocation}
-                position={[myLocation[0], myLocation[1]]}
-                icon={meIcon}
-              >
-                <Popup>
-                  <h3>You are here!</h3>
-                </Popup>
-              </Marker>
-              <Marker
-                key={catDetails.name}
-                position={[catDetails.latitude, catDetails.longitude]}
-                icon={catIcon}
-              >
-                <Popup>
-                  <img
-                    alt={catDetails.name}
-                    style={{ width: "125px", borderRadius: "0.5em" }}
-                    src={catDetails.picture}
-                  />
-                  <p>{catDetails.name}</p>
-                </Popup>
-              </Marker>
-              {/* <Circle
-              center={[catDetails.latitude, catDetails.longitude]}
-              radius={calculateSpread(
-                catDetails.latitude,
-                catDetails.longitude,
-                catDetails.images.map((image) => [
-                  image.latitude,
-                  image.longitude,
-                ])
-              )}
-            /> */}
-              {/* For debugging, uncomment this */}
-              {/* {catDetails.images.map((image) => (
-              <Marker
-                opacity={0.5}
-                position={[image.latitude, image.longitude]}
-              />
-            ))} */}
-            </MapContainer>
+        <div className="Comment-wrapper">
+          <h2 className="Comment-header">
+            Comments <FaRegComment />
+          </h2>
+          {catComments.map((comment) => (
+            <div key={comment.id}>
+              <h3 className="CommentUser-name">{comment.user.name}</h3>
+              <p className="CommentUser-text">{comment.text}</p>
+            </div>
+          ))}
+          {token ? (
+            <CommentForm />
           ) : (
-            ""
+            <h3 className="Comment-message">
+              You need to Login to leave the comment <AiOutlineLogin />
+            </h3>
           )}
         </div>
       </div>
-      <div className="Footer"></div>
+      <div className="Footer">
+        <h2 className="Footer-header">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/MartaPanasyuk" className="Footer-link">
+            Marta
+          </a>
+        </h2>
+      </div>
     </div>
   );
 }
-
-/*
-
-
-<div className="Comment-wrapper">
-            {catDetails.comments.map((comment) => (
-              <div key={comment.id}>
-                <h3 className="user-name">{comment.user.name}</h3>
-                <p className="user-text">{comment.text}</p>
-              </div>
-            ))}
-            {token ? (
-              <CommentForm />
-            ) : (
-              <h3>You need to Login to leave the comment</h3>
-            )}
-          </div>
-
-*/

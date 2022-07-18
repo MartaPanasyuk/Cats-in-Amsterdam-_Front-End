@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import PlotRoute from "../PlotRoute";
 import L from "leaflet";
 import { IoIosHeart } from "react-icons/io";
+import { BsEmojiHeartEyes } from "react-icons/bs";
 
 export default function MySpace() {
   const dispatch = useDispatch();
@@ -66,81 +67,101 @@ export default function MySpace() {
   });
 
   return (
-    <div className="container">
-      <h2 className="section-header">Cats Near You</h2>
-      <div className="Image-sector">
-        {filteredCats.map((cat) => (
-          <div className="Image-card-wrapper ">
-            <img src={cat.picture} alt={cat.name} className="Image-card" />
-            <Link to={`/cats/${cat.id}`} className="dex">
-              {" "}
-              <h4>
-                {cat.name} <IoIosHeart />
-              </h4>
-            </Link>
-          </div>
-        ))}
-      </div>
-      <p class="lable">―MAP―</p>
-      {myLocation ? (
-        <div className="MapContainer">
-          <div className="Map-header">
-            <h2>Find you way here</h2>
-          </div>
-          <MapContainer
-            style={{
-              height: "40vw",
-              width: "60vw",
-              maxWidth: "1000px",
-              maxHeight: "600px",
-              borderRadius: "15px",
-              marginTop: "10px",
-              marginBottom: "20px",
-              border: "8px solid #ff5b2e",
-            }}
-            center={[52.36994, 4.906]}
-            zoom={25}
-            scrollWheelZoom={true}
-          >
-            {filteredCats.map((cat) => (
-              <PlotRoute points={[myLocation, [cat.latitude, cat.longitude]]} />
-            ))}
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker
-              key={myLocation}
-              position={[myLocation[0], myLocation[1]]}
-              icon={meIcon}
-            >
-              <Popup>
-                <h3>You are Here!!!</h3>
-              </Popup>
-            </Marker>
-            {filteredCats.map((cat) => (
-              <Marker
-                key={cat.name}
-                position={[cat.latitude, cat.longitude]}
-                icon={catIcon}
-              >
-                <Popup>
-                  <Link to={`/cats/${cat.id}`}>
-                    <img
-                      alt={cat.name}
-                      style={{ width: "125px", borderRadius: "0.5em" }}
-                      src={cat.picture}
-                    />{" "}
-                  </Link>
-                  <p>{cat.name}</p>
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
+    <div>
+      <div className="container">
+        <div>
+          <p className="lable">―MAP―</p>
+          {myLocation ? (
+            <div className="MapContainer">
+              <div className="Map-header">
+                <h2 className="section-header">Find you way here</h2>
+              </div>
+              <div className="map">
+                <MapContainer
+                  style={{
+                    height: "40vw",
+                    width: "60vw",
+                    maxWidth: "1000px",
+                    maxHeight: "600px",
+                    borderRadius: "15px",
+                    marginTop: "10px",
+                    marginBottom: "20px",
+                    border: "8px solid #ff5b2e",
+                  }}
+                  center={[52.36994, 4.906]}
+                  zoom={25}
+                  scrollWheelZoom={true}
+                >
+                  {filteredCats.map((cat) => (
+                    <PlotRoute
+                      points={[myLocation, [cat.latitude, cat.longitude]]}
+                    />
+                  ))}
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker
+                    key={myLocation}
+                    position={[myLocation[0], myLocation[1]]}
+                    icon={meIcon}
+                  >
+                    <Popup>
+                      <h3>You are Here!!!</h3>
+                    </Popup>
+                  </Marker>
+                  {filteredCats.map((cat) => (
+                    <Marker
+                      key={cat.name}
+                      position={[cat.latitude, cat.longitude]}
+                      icon={catIcon}
+                    >
+                      <Popup>
+                        <Link to={`/cats/${cat.id}`}>
+                          <img
+                            alt={cat.name}
+                            style={{ width: "125px", borderRadius: "0.5em" }}
+                            src={cat.picture}
+                          />{" "}
+                        </Link>
+                        <p>{cat.name}</p>
+                      </Popup>
+                    </Marker>
+                  ))}
+                </MapContainer>
+              </div>
+            </div>
+          ) : (
+            <div>Loading</div>
+          )}
         </div>
-      ) : (
-        <div>Loading</div>
-      )}
+        <div className="Img-block">
+          <h2 className="section-header">
+            Hey look who's here <BsEmojiHeartEyes />
+          </h2>
+          <div className="Image-sector">
+            {filteredCats.map((cat) => (
+              <div className="Image-card-wrapper ">
+                <img src={cat.picture} alt={cat.name} className="Image-card" />
+                <Link to={`/cats/${cat.id}`} className="dex">
+                  {" "}
+                  <h4 className="Image-sector-text">
+                    {cat.name} <IoIosHeart />
+                  </h4>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="Footer">
+        <h2 className="Footer-header">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/MartaPanasyuk" className="Footer-link">
+            Marta
+          </a>
+        </h2>
+      </div>
     </div>
   );
 }

@@ -5,10 +5,6 @@
 
 .App-wrapper {
   background-color: #f7ede2;
-  /*background-image: url("../src/images/image-from-rawpixel-id-2210775-jpeg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-position-x: 18%;
-  */
   color: #424242;
+  min-height: 100vh;
 }

@@ -42,29 +42,42 @@ export default function CataLog() {
   };
 
   return (
-    <div className="container">
-      <div className="Button-section">
-        <button onClick={() => setDisplayAllCats(true)} className="Catalog-btn">
-          <h2 className="button-text">All</h2>
-        </button>
-        <button onClick={() => handleCilck(1)} className="Catalog-btn">
-          <h2 className="button-text">Flufiness</h2>
-        </button>
-        <button onClick={() => handleCilck(2)} className="Catalog-btn">
-          <h2 className="button-text">Purring</h2>
-        </button>
-        <button onClick={() => handleCilck(3)} className="Catalog-btn">
-          <h2 className="button-text">Friendliness</h2>
-        </button>
+    <div>
+      <div className="container">
+        <div className="Button-section">
+          <button
+            onClick={() => setDisplayAllCats(true)}
+            className="Catalog-btn"
+          >
+            <h2 className="button-text">All</h2>
+          </button>
+          <button onClick={() => handleCilck(1)} className="Catalog-btn">
+            <h2 className="button-text">Flufiness</h2>
+          </button>
+          <button onClick={() => handleCilck(2)} className="Catalog-btn">
+            <h2 className="button-text">Purring</h2>
+          </button>
+          <button onClick={() => handleCilck(3)} className="Catalog-btn">
+            <h2 className="button-text">Friendliness</h2>
+          </button>
+        </div>
+        <div>
+          {displayAllCats ? (
+            <CatLogPage cats={selectAllCats} />
+          ) : (
+            <div>
+              <CatLogPage cats={selectedCats} />
+            </div>
+          )}
+        </div>
       </div>
-      <div>
-        {displayAllCats ? (
-          <CatLogPage cats={selectAllCats} />
-        ) : (
-          <div>
-            <CatLogPage cats={selectedCats} />
-          </div>
-        )}
+      <div className="Footer">
+        <h2 className="Footer-header">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/MartaPanasyuk" className="Footer-link">
+            Marta
+          </a>
+        </h2>
       </div>
     </div>
   );

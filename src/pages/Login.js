@@ -60,6 +60,14 @@ export const Login = () => {
           </form>
         </Container>
       </div>
+      <div className="Footer">
+        <h2 className="Footer-header">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/MartaPanasyuk" className="Footer-link">
+            Marta
+          </a>
+        </h2>
+      </div>
     </div>
   );
 };
