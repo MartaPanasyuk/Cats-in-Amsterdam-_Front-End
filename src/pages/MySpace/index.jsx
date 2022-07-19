@@ -46,15 +46,16 @@ export default function MySpace() {
   //console.log("myLocation", myLocation);
 
   const filteredCats = cats.filter((cat) => {
-    const distance = getDistance(
-      { latitude: cat.latitude, longitude: cat.longitude },
-      { latitude: myLocation[0], longitude: myLocation[1] }
-    );
+    if (myLocation) {
+      const distance = getDistance(
+        { latitude: cat.latitude, longitude: cat.longitude },
+        { latitude: myLocation[0], longitude: myLocation[1] }
+      );
 
-    const near = distance < 3000;
-    return near;
+      const near = distance < 3000;
+      return near;
+    }
   });
-
   //marker icon
   const meIcon = L.icon({
     iconUrl: require("../../images/navigation.png"),
