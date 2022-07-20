@@ -168,21 +168,25 @@ export default function CatPageDetails() {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <PlotRoute
-                  points={[
-                    myLocation,
-                    [catDetails.latitude, catDetails.longitude],
-                  ]}
-                />
-                <Marker
-                  key={myLocation}
-                  position={[myLocation[0], myLocation[1]]}
-                  icon={meIcon}
-                >
-                  <Popup>
-                    <h3>You are here!</h3>
-                  </Popup>
-                </Marker>
+                {myLocation && (
+                  <>
+                    <PlotRoute
+                      points={[
+                        myLocation,
+                        [catDetails.latitude, catDetails.longitude],
+                      ]}
+                    />
+                    <Marker
+                      key={myLocation}
+                      position={[myLocation[0], myLocation[1]]}
+                      icon={meIcon}
+                    >
+                      <Popup>
+                        <h3>You are here!</h3>
+                      </Popup>
+                    </Marker>
+                  </>
+                )}
                 <Marker
                   key={catDetails.name}
                   position={[catDetails.latitude, catDetails.longitude]}
