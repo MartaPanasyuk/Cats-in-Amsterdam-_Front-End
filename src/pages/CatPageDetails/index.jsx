@@ -112,6 +112,8 @@ export default function CatPageDetails() {
     iconSize: [40, 40],
   });
 
+  console.log("MY LOCATION", myLocation);
+
   return (
     <div className="Details-page">
       <div className="container">
@@ -252,7 +254,8 @@ export default function CatPageDetails() {
                     Have you seen Me? <FaPaw />
                   </h3>
                   <p className="subtitle">
-                    I don't mind you uploading my photo right here
+                    I don't mind you uploading my photo right here. But firstly,
+                    please log in.
                   </p>
                 </div>
               )}
