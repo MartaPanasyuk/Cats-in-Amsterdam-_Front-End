@@ -1,38 +1,11 @@
-# Frontend template
+# CatRadar
 
-This is a simple react/redux/jwt template to start a project quickly
+CatRadar is a full stack app with the frontend built in React and a backend that uses NodeJS and Express.
 
-## Table of contents:
+Me and my friends as cat people like to share street cat pictures with each other.  And one I thought why not create a real app with all Amsterdam's cats that you can meet on the street. As a user, you can upload not only a picture but also a location where this cat was cathed. Main idea of my app, just shre your hapiness with each other. 
+If you are bored duiring your walks, you can always play in "Pokemon - go" but with real cats. 
+Is it not fun?
 
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Create React App docs](#cra-docs)**
 
-## SETUP How to use this template
-
-1. Create a new project based on this template using the `Use this template` button
-
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
-
-2. Clone the app
-
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
-
-3. cd into your project
-
-```
-cd YOUR_PROJECT_NAME
-```
-
-4. install dependencies
-
-```
-npm install
-```
-
-5. Start development server with npm start
-
-```
-npm start
-```
+Here is a link to the deployed app: https://car-radar.netlify.app/
+You can login with email: test@test.com and password: test1234 if you would like to try out CatRadar app.
