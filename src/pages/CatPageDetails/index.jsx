@@ -254,8 +254,8 @@ export default function CatPageDetails() {
                     Have you seen Me? <FaPaw />
                   </h3>
                   <p className="subtitle">
-                    I don't mind you uploading my photo right here. But firstly,
-                    please log in.
+                    I don't mind you uploading my photo right here. <br /> But
+                    firstly, please log in.
                   </p>
                 </div>
               )}
