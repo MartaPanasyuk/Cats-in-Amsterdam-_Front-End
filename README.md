@@ -9,5 +9,3 @@ Is it not fun?
 Here is a link to the deployed app: https://car-radar.netlify.app/
 You can login with email: test@test.com and password: test1234 if you would like to try out CatRadar app.
 
-### How it works
-On a home page you can find a map with all cats
